@@ -24,11 +24,11 @@ L'atelier de formation à la plateforme FASTR, dans le cadre de l'institutionnal
 |---|---|---|
 | **Matinées (théorie)** | Présente les contenus | Relie chaque notion à la réalité du SNIS tchadien, relance les questions, reformule en termes locaux |
 | **Après-midis (pratique)** | Appuie les tables, règle les problèmes techniques | Conduit la salle : lance chaque activité, démontre à l'écran, tient le rythme, vérifie les points de passage |
-| **Comptes et accès** | Approuve les comptes sur la page **Utilisateurs** | Repère les participants bloqués et les signale à l'équipe FASTR |
+| **Comptes et accès** | L'administrateur FASTR de l'instance approuve les comptes sur la page **Utilisateurs** | Repère les participants bloqués et les signale à l'administrateur FASTR |
 
 ## Avant l'atelier
 
-- ☐ Comptes créés et approuvés sur la page **Utilisateurs** pour la liste des participants connue à l'avance
+- ☐ Comptes créés et approuvés par l'administrateur FASTR sur la page **Utilisateurs** pour la liste des participants connue à l'avance
 - ☐ Paquet de résultats épinglé sur la page **Résultats** (le 16 novembre, le paquet « 2026-11-15 » l'était), généré avec les données récentes
 - ☐ Fichiers de limites administratives chargés pour la carte d'Explorer (sinon, le dire dès le départ)
 - ☐ Dossier pays créé sur la page **Produits**, dans lequel les participants créeront leur propre dossier
@@ -93,13 +93,13 @@ C'est vous qui conduisez la salle. L'équipe FASTR circule entre les tables. Com
 
 **Démontrer.** Couvert par la démo de l'écran d'accueil. Distribuez ensuite *Connexion à la plateforme* et laissez-les travailler.
 
-**Formulez-le ainsi.** *« Vous n'avez pas besoin de votre mot de passe DHIS2 : FASTR a ses propres comptes. Si vous vous inscrivez aujourd'hui et que vous voyez une liste vide après connexion, dites-le-moi : votre compte doit être approuvé, et c'est notre travail, pas le vôtre. »*
+**Formulez-le ainsi.** *« Vous n'avez pas besoin de votre mot de passe DHIS2 : FASTR a ses propres comptes. Si vous vous inscrivez aujourd'hui et que vous voyez une liste vide après connexion, dites-le-moi : votre compte doit être approuvé par l'administrateur FASTR, pas par vous. »*
 
 **À quoi ressemble un bon résultat.** Chaque participant sur la page Produits, la navigation latérale dépliée, capable d'ouvrir le dossier pays et de revenir.
 
 **À surveiller.**
 - Les e-mails de vérification qui arrivent dans les spams.
-- Une liste vide ou un message de compte non approuvé : signalez-le à l'équipe FASTR, qui approuve sur la page **Utilisateurs**. Pendant ce temps, mettez le participant en binôme avec un voisin connecté.
+- Une liste vide ou un message de compte non approuvé : signalez-le à l'administrateur FASTR, qui approuve sur la page **Utilisateurs**. Pendant ce temps, mettez le participant en binôme avec un voisin connecté.
 - La navigation latérale repliée qui déroute : montrez la flèche en bas de la barre.
 
 ---
@@ -117,7 +117,7 @@ C'est vous qui conduisez la salle. L'équipe FASTR circule entre les tables. Com
 **À quoi ressemble un bon résultat.** Un dossier par participant, à son nom, vide, dans le dossier pays.
 
 **À surveiller.**
-- **Nouveau dossier** absent du menu : le compte n'a pas le rôle nécessaire. Signalez-le à l'équipe FASTR.
+- **Nouveau dossier** absent du menu : le compte n'a pas le rôle nécessaire. Signalez-le à l'administrateur FASTR.
 - Un dossier créé au premier niveau au lieu du dossier pays : **Déplacer dans**.
 
 ---
@@ -173,7 +173,7 @@ Vérifiez les trois points de passage avant de laisser partir la salle : connect
 
 > **Plateforme indisponible.** Parcourez l'écran avec les captures d'écran des documents participants, et faites travailler les binômes sur papier : la question à transformer en graphique, ou l'interprétation en trois parties.
 
-> **Comptes non approuvés.** L'équipe FASTR approuve sur la page **Utilisateurs** pendant la pause. Entre-temps, le participant travaille en binôme avec un voisin connecté.
+> **Comptes non approuvés.** L'administrateur FASTR approuve sur la page **Utilisateurs** pendant la pause. Entre-temps, le participant travaille en binôme avec un voisin connecté.
 
 ## Où obtenir de l'aide
 

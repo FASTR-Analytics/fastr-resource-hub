@@ -510,6 +510,7 @@ def main():
                 for para in x.text_frame.paragraphs:
                     for r in para.runs:
                         r.text = (r.text.replace("mauritanie.fastr-analytics.org", "tchad.fastr-analytics.org")
+                                  .replace("?mode=sign-up", "")
                                   .replace("FASTR Mauritanie 2026", "FASTR Tchad 2026"))
         if shot.exists():
             pics = [x for x in s.shapes if x.shape_type == 13]
@@ -732,8 +733,27 @@ def main():
     ], notes=["La ligne clé est la dernière. Quand un établissement cesse de rapporter, l'ancien modèle voyait une baisse du total. Le nouveau retire cet établissement de l'observé et de l'attendu pour ce mois.",
               "Bande de crédibilité : la fourchette dans laquelle le modèle s'attend à voir le volume 95 fois sur 100. Hors de la bande, c'est un signal ; dedans, c'est la variation normale.",
               "La bande est plus large pour les petites zones et les indicateurs à faible volume : moins de données, moins de certitude."])
-    n_b3 = new_content(FR / "m6_data_analysis" / "m6_2g_reading_bayesian_disruptions_chart.md", tag=TAG_METH)
-    n_b4 = new_content(FR / "m6_data_analysis" / "m6_2h_reporting_gap_vs_service_gap.md", tag=TAG_METH)
+    n_b3 = new_content(title="Lire le graphique des perturbations", tag=TAG_METH,
+                       image=TCHAD_SHOTS / "20b_disruption_cpn1_panel.png", img_box=(6.9, 1.7, 6.0, None), blocks=[
+        ("h", [("Ce que vous voyez", True)]),
+        ("p", [("Explorer → Détection des perturbations → Services observés et attendus, CPN 1 au niveau national, Tchad. La ligne pleine est le volume observé, la ligne pointillée le volume attendu, la bande grise la bande de crédibilité à 95 %.", False)]),
+        ("h", [("Ce que cela montre", True)]),
+        ("p", [("Rouge là où l'observé passe sous la bande, un déficit ; vert là où il passe au-dessus, un excédent. Dans la bande, c'est la variation normale.", False)]),
+        ("h", [("Interprétation", True)]),
+        ("p", [("Une plage rouge est une vraie baisse parmi les établissements qui ont rapporté. Demandez ce qui s'est passé ces mois-là : ruptures de stock, grèves, insécurité, campagne ailleurs.", False)]),
+    ], notes=["Capture réelle de l'instance Tchad, paquet 2026-11-15, prise le 16 novembre. Le même graphique existe pour les 57 indicateurs ; les participants le retrouveront dans Explorer l'après-midi.",
+              "Un seul mois rouge mérite un regard ; plusieurs mois rouges d'affilée sont le motif sur lequel agir.",
+              "Les derniers mois peuvent changer : des rapports tardifs arrivent après la génération du paquet."])
+    n_b4 = new_content(title="Le tableau des perturbations par province", tag=TAG_METH,
+                       image=TCHAD_SHOTS / "21_explore_disruption_gaps.png", img_box=(6.9, 1.7, 6.0, None), blocks=[
+        ("h", [("Ce que vous voyez", True)]),
+        ("p", [("Explorer → Détection des perturbations → Perturbation des services : la différence en % entre services observés et attendus, une ligne par province, une colonne par indicateur.", False)]),
+        ("h", [("Ce que cela montre", True)]),
+        ("p", [("Rouge : moins de services que prévu ; vert : plus. Plus la couleur est foncée, plus l'écart est grand. La ligne National résume le pays.", False)]),
+        ("h", [("Interprétation", True)]),
+        ("p", [("Lisez d'abord la colonne : un indicateur rouge partout est un problème national. Lisez ensuite la ligne : une province rouge sur tout est un problème de rapportage ou d'accès, à vérifier avec la qualité des données avant de questionner le programme.", False)]),
+    ], notes=["Capture réelle de l'instance Tchad, paquet 2026-11-15. La même vue existe en carte (onglet Carte) si les limites administratives sont chargées.",
+              "Le module distingue en interne l'écart de rapportage (rapports manquants) de l'écart de service (vrai changement de prestation) ; ce tableau montre l'écart total. Ordre pratique : complétude d'abord, programme ensuite."])
 
     # ---------- order ----------
     order = [S[1], S[2], S[3], S[4],

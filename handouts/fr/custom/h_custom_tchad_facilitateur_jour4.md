@@ -24,11 +24,11 @@ L'atelier de formation à la plateforme FASTR, dans le cadre de l'institutionnal
 |---|---|---|
 | **Matinées (théorie)** | Présente les contenus | Relie chaque notion à la réalité du SNIS tchadien, relance les questions, reformule en termes locaux |
 | **Après-midis (pratique)** | Appuie les tables, règle les problèmes techniques | Conduit la salle : lance chaque activité, démontre à l'écran, tient le rythme, vérifie les points de passage |
-| **Comptes et accès** | Approuve les comptes sur la page **Utilisateurs** | Repère les participants bloqués et les signale à l'équipe FASTR |
+| **Comptes et accès** | L'administrateur FASTR de l'instance approuve les comptes sur la page **Utilisateurs** | Repère les participants bloqués et les signale à l'administrateur FASTR |
 
 ## Avant l'atelier
 
-- ☐ Comptes créés et approuvés sur la page **Utilisateurs** pour la liste des participants connue à l'avance
+- ☐ Comptes créés et approuvés par l'administrateur FASTR sur la page **Utilisateurs** pour la liste des participants connue à l'avance
 - ☐ Paquet de résultats épinglé sur la page **Résultats** (le 16 novembre, le paquet « 2026-11-15 » l'était), généré avec les données récentes
 - ☐ Fichiers de limites administratives chargés pour la carte d'Explorer (sinon, le dire dès le départ)
 - ☐ Dossier pays créé sur la page **Produits**, dans lequel les participants créeront leur propre dossier
@@ -242,7 +242,7 @@ Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur de
 
 > **Plateforme indisponible.** Parcourez l'écran avec les captures d'écran des documents participants, et faites travailler les binômes sur papier : la question à transformer en graphique, ou l'interprétation en trois parties.
 
-> **Comptes non approuvés.** L'équipe FASTR approuve sur la page **Utilisateurs** pendant la pause. Entre-temps, le participant travaille en binôme avec un voisin connecté.
+> **Comptes non approuvés.** L'administrateur FASTR approuve sur la page **Utilisateurs** pendant la pause. Entre-temps, le participant travaille en binôme avec un voisin connecté.
 
 ## Où obtenir de l'aide
 
