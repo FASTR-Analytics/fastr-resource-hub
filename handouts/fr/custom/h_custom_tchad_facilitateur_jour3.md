@@ -180,4 +180,4 @@ Vérifiez les trois points de passage avant de laisser partir la salle : connect
 - **Amal Tucker Brown**, spécialiste des résultats, équipe FASTR : résultats, interprétation et usage.
 - **Claire Boulange**, experte technique FASTR : assistance technique et formation sur la plateforme.
 - Support de la plateforme : fastr@usefuldata.com.au
-- Bouton **Aide** de la plateforme : Visites guidées, Demander de l'aide, Envoyer un commentaire, Documentation (https://fastr-analytics.org/)
+- Bouton **Aide** de la plateforme : Visites guidées, Demander de l'aide, Envoyer un commentaire, Documentation (https://fastr-analytics.org/fr/)

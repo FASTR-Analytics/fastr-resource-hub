@@ -331,6 +331,15 @@ def main():
     body_content = shapes_by_name(T_content)["Text 2"]
     body_activity = shapes_by_name(T_activity)["Text 2"]
 
+    # Help slide: documentation link -> French site
+    for x in S[66].shapes:
+        if not x.has_text_frame: continue
+        for para in x.text_frame.paragraphs:
+            for r in para.runs:
+                if r.text.strip() == "https://fastr-analytics.org/overview/":
+                    r.text = "https://fastr-analytics.org/fr/"
+                    r.hyperlink.address = "https://fastr-analytics.org/fr/"
+
     # ---------- new slides ----------
     def new_content(md: Path | None = None, *, title=None, blocks=None, image=None, tag="", notes=None,
                     img_box=(7.05, 1.62, 5.8, None)):
