@@ -880,6 +880,41 @@ def main():
                 for r in para._p.findall("a:r", NS):
                     fix_run_font(r, size=3200, bold=True)
 
+    # ---------- keep content clear of the footer zone (7.0in and below) ----------
+    LIMIT = Inches(6.9)
+    for n, sl in enumerate(prs.slides, 1):
+        texts = [x for x in sl.shapes if x.has_text_frame and x.text_frame.text.strip()]
+        has_foot = any(abs(x.top - Inches(7.1)) < Inches(0.1) for x in texts)
+        if not has_foot:
+            continue
+        for x in list(sl.shapes):
+            if abs(x.top - Inches(7.1)) < Inches(0.1) or abs(x.top - Inches(7.04)) < Inches(0.03):
+                continue
+            bottom = x.top + x.height
+            if bottom <= LIMIT:
+                continue
+            if x.shape_type == 13:  # picture: scale down to the limit, keep aspect ratio
+                new_h = LIMIT - x.top
+                if new_h > Inches(1):
+                    ratio = new_h / x.height
+                    x.height = int(new_h); x.width = int(x.width * ratio)
+            elif x.has_text_frame and x.top > Inches(5.5):  # footnote-like text box: move up
+                x.top = int(LIMIT - x.height)
+    # prompts slide: two columns plus a closing line were overlapping in the source deck
+    sh = shapes_by_name(S[52])
+    for name in ("Text 3", "Text 4"):
+        if name in sh:
+            for para in sh[name].text_frame.paragraphs:
+                for r in para.runs:
+                    if r.font.size and r.font.size.pt >= 16:
+                        r.font.size = Pt(14)
+            sh[name].height = Inches(3.6)
+    if "Text 5" in sh:
+        sh["Text 5"].top = Inches(6.0); sh["Text 5"].height = Inches(0.85)
+        for para in sh["Text 5"].text_frame.paragraphs:
+            for r in para.runs:
+                r.font.size = Pt(13)
+
     OUT.parent.mkdir(parents=True, exist_ok=True)
     prs.save(str(OUT))
     print(f"Wrote {len(prs.slides)} slides -> {OUT}")
