@@ -36,7 +36,7 @@ Demander à l'assistant IA de construire le même type de graphique que vous ven
 
 <h2 class="step-h"><span class="step-n">1</span><span>Partir d'une visualisation vierge</span></h2>
 
-Sur la page **Produits**, cliquez sur **Nouveau → Nouvelle visualisation**, gardez le paquet épinglé et **Toutes les données**, puis cliquez sur **Suivant**. Choisissez n'importe quelle métrique et n'importe quel préréglage pour ouvrir un éditeur (par exemple **Indicator values → Indicator value → Scorecard table → Insérer**). Ce que vous choisissez n'a pas d'importance : l'IA le changera.
+Sur la page **Produits**, cliquez sur **Nouveau → Nouvelle visualisation**, gardez le paquet épinglé et **Toutes les données**, puis cliquez sur **Suivant**. Choisissez n'importe quelle métrique et n'importe quel préréglage pour ouvrir un éditeur (par exemple **Utilisation des services → Valeur de l'indicateur → Tableau de bord → Insérer**). Ce que vous choisissez n'a pas d'importance : l'IA le changera.
 
 Renommez-la tout de suite (cliquez sur le titre) pour la reconnaître dans la liste : *Test IA, CPN1*.
 

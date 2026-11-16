@@ -4,20 +4,23 @@ theme: fastr
 paginate: true
 ---
 
-## Format your report text — quick reference
+## Format your slide text — quick reference
 
-You can format text using simple symbols, just like writing a message.
+Click into a text block: the toolbar appears above the slide. Select text, then click.
 
-| Symbol | Result |
-|--------|--------|
-| `# Heading` | Large heading |
-| `## Subheading` | Smaller heading |
-| `**bold**` | **bold** |
-| Start a line with `-` (a hyphen) | Bullet point |
-| Leave a blank line | Add spacing |
+| Toolbar control | What it does |
+|---|---|
+| **Normal text ▾** (style menu) | Turn the line into a heading or back into normal text |
+| **B** / **I** | Bold or italic for the selected words |
+| **•** / **1.** | Bullet list or numbered list, one item per line |
+| **"** | Quote block, for a verbatim sentence from a report or a guideline |
+| Undo arrows, or Ctrl/Cmd+Z | Take back the last change |
+
+Nothing to save: the deck is **Live** and every change is kept in **History**.
 
 <!--
 PRESENTER NOTES:
-- Keep this slide projected while participants work through the Format your report text activity.
-- The same symbols work in the slide editor and in the AI Assistant chat.
+- Keep this slide projected while participants work through the Format your slide text activity.
+- Headings come from the style menu, not from typing # symbols; typed symbols stay as plain characters.
+- The report editor has the same toolbar with a few more items (headings 1 to 3, text size).
 -->

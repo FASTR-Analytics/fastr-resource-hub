@@ -20,6 +20,5 @@ NOTAS DO APRESENTADOR:
 - ~15 min, depois da atividade da pasta, antes do módulo de Visualizações. Risco baixo: nada é guardado, nada se pode estragar.
 - Quatro controlos a nomear no ecrã: família de dados (HMIS/HFA), pacote de resultados, âmbito, módulo e métrica.
 - O mapa precisa de ficheiros de limites administrativos; numa instância sem eles, a página diz isso. Diga-o antes de alguém reportar um erro.
-- Os nomes dos módulos aparecem em inglês na interface em português. Problema de apresentação conhecido.
 - Termine perguntando a cada par que pergunta quer transformar num gráfico a seguir.
 -->

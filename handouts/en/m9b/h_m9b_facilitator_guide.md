@@ -97,7 +97,6 @@ By the end, every participant should be signed in, have one folder with their na
 **Watch for.**
 - Numbers that differ between neighbours: package, scope, level or period. Make them find which.
 - "The map is broken": no boundary files on the instance. Say so up front.
-- Module names in English in the French interface: a known display issue.
 
 ## Wrapping up
 

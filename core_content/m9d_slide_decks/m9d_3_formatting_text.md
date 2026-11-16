@@ -3,28 +3,28 @@ marp: true
 theme: fastr
 paginate: true
 ---
+
 <!-- _class: activity-pointer -->
 
 <div class="activity-pointer">
 
 ![h:90](../../resources/icons/hands_on.svg)
 
-## Activity: Format your report text
+## Activity: Format your slide text
 
 **What you'll learn**
-The same markdown shortcuts that work in the chat also work in the slide editor. You can add headings, bold text, and bullet lists.
+The text editor has a toolbar: a style menu for headings, bold and italic, bullet and numbered lists, a quote. No symbols to type.
 
 **What you'll practice**
-- Add a heading to your slide
-- Bold a key phrase
-- Add a bullet list
-- Save and preview
+- Turn the first line of your interpretation into a heading
+- Bold the one phrase that carries the message
+- Split a paragraph with several ideas into a bullet list
 
 </div>
 
 <!--
 PRESENTER NOTES:
-- Activity adapted from the m9d facilitator guide. Handout: h_m9d_format_text.
-- A reference slide with the markdown shortcuts (m9d_3_ref_markdown_shortcuts) follows; keep it projected while participants work.
-- Show participants the same symbols work in the slide editor as in the chat.
+- Handout: h_m9d_format_text. The quick-reference slide that follows shows the toolbar; keep it projected while participants work.
+- Click into a text block to open the editor; the toolbar sits above the slide. Everything saves as you type (Live).
+- Over-formatting is the usual failure: one bold phrase per slide, not three.
 -->

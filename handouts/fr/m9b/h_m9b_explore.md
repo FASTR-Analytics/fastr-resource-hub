@@ -40,7 +40,7 @@ Cliquez sur **Explorer** dans la navigation latérale. Quatre contrôles se trou
 - **HMIS / FOSA** : la famille de données. Restez sur HMIS.
 - Le **paquet de résultats**, en haut à droite. Celui qui est épinglé est sélectionné ; laissez-le.
 - La **portée**, juste à côté. **Toutes les données** signifie tout le pays.
-- Le **module** et sa **métrique**, à gauche. La page s'ouvre sur **Indicator values → Volumes de services** : le volume mensuel de chaque indicateur.
+- Le **module** et sa **métrique**, à gauche. La page s'ouvre sur **Utilisation des services → Volumes de services** : le volume mensuel de chaque indicateur.
 
 ![h:260](../../../resources/screenshots/platform_v2_fr/13_explore.png)
 
@@ -61,11 +61,11 @@ La vue **Tableau** affiche une ligne par zone et une colonne par indicateur. Tro
 
 Réglez le niveau sur celui juste en dessous du national et la période sur **12 derniers mois**. Cliquez sur un en-tête de colonne pour trier. **Rechercher une colonne** vous amène à un indicateur quand il y en a beaucoup. **Télécharger** enregistre le tableau dans un fichier.
 
-**Notez :** le total national d'**Antenatal care 1** (la CPN1) sur les 12 derniers mois, et la zone avec la valeur la plus basse.
+**Notez :** le total national d'**CPN1** (la CPN1) sur les 12 derniers mois, et la zone avec la valeur la plus basse.
 
 <h2 class="step-h"><span class="step-n">3</span><span>Le suivre dans le temps</span></h2>
 
-Cliquez sur **Dans le temps**. Chaque indicateur reçoit un petit graphique de son volume mensuel. Les filtres deviennent l'indicateur, le niveau et le pas de temps (**Mois**, **Trimestre**, **Année**). Choisissez **Antenatal care 1** seul, au niveau national.
+Cliquez sur **Dans le temps**. Chaque indicateur reçoit un petit graphique de son volume mensuel. Les filtres deviennent l'indicateur, le niveau et le pas de temps (**Mois**, **Trimestre**, **Année**). Choisissez **CPN1** seul, au niveau national.
 
 ![h:250](../../../resources/screenshots/platform_v2_fr/13b_explore_over_time.png)
 
@@ -81,11 +81,11 @@ Cliquez sur **Carte**. Un indicateur, un niveau, une période, coloré par zone.
 
 <h2 class="step-h"><span class="step-n">5</span><span>Changer de module</span></h2>
 
-Ouvrez le menu déroulant du **module** à gauche. **Résultats principaux** contient Indicator values. **Analyses complémentaires** liste les autres modules : Data quality assessment, Data quality adjustments, Disruption detection, Coverage denominators, Coverage estimates. Chaque module apporte ses propres métriques et sa propre vue.
+Ouvrez le menu déroulant du **module** à gauche. **Résultats principaux** contient Utilisation des services (les volumes). **Analyses complémentaires** liste les autres modules : Évaluation de la qualité des données, Ajustements de la qualité des données, Détection des perturbations, Dénominateurs de couverture, Estimations de couverture. Chaque module apporte ses propres métriques et sa propre vue.
 
 ![h:230](../../../resources/screenshots/platform_v2_fr/13d_explore_module_menu.png)
 
-Choisissez **Coverage estimates** (Estimations de couverture). La vue devient **Coverage over time** : un graphique par indicateur, avec des points gris pour la couverture calculée à partir des données de routine, noirs pour les estimations d'enquête, rouges pour la projection qui prolonge la dernière enquête.
+Choisissez **Estimations de couverture**. La vue devient **Couverture dans le temps** : un graphique par indicateur, avec des points gris pour la couverture calculée à partir des données de routine, noirs pour les estimations d'enquête, rouges pour la projection qui prolonge la dernière enquête.
 
 ![h:250](../../../resources/screenshots/platform_v2_fr/13e_explore_coverage_table.png)
 

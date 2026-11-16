@@ -26,7 +26,6 @@ Cada módulo muda a lista de métricas e a vista. **Coverage estimates → Cover
 
 <!--
 PRESENTER NOTES:
-- Abra a lista de módulos no ecrã e leia os dois grupos. Os nomes dos módulos aparecem em inglês na interface: problema de apresentação conhecido.
 - As cores do gráfico de cobertura são as mesmas dos diapositivos de metodologia e das visualizações: cinzento HMIS, preto inquérito, vermelho projeção.
 - Disruption detection → Observed and expected services mostra a banda esperada e os meses fora dela.
 - Não explique os métodos aqui; os módulos de qualidade dos dados, perturbações e cobertura têm cada um a sua sessão.

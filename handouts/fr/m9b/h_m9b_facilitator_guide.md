@@ -86,7 +86,7 @@ Prise en main permet à chaque participant d'accéder à la plateforme et de s'o
 
 ### 3. Jeter un premier regard avec Explorer · ~15 min · pratique, en binôme
 
-**Le déroulé.** Les participants ouvrent **Explorer**, lisent Antenatal care 1 (la CPN1) dans le **Tableau** (niveau en dessous du national, 12 derniers mois), le suivent **Dans le temps**, essaient la **Carte**, passent le module sur **Coverage estimates**, et notent trois chiffres à comparer avec un voisin.
+**Le déroulé.** Les participants ouvrent **Explorer**, lisent la CPN1 dans le **Tableau** (niveau en dessous du national, 12 derniers mois), le suivent **Dans le temps**, essaient la **Carte**, passent le module sur **Estimations de couverture**, et notent trois chiffres à comparer avec un voisin.
 
 **Démontrer.** Nommez à l'écran les quatre contrôles du haut (HMIS/FOSA, paquet, portée, module et métrique), passez une fois de Tableau à Dans le temps puis à Carte, et ouvrez le menu des modules pour montrer **Analyses complémentaires**.
 
@@ -97,7 +97,6 @@ Prise en main permet à chaque participant d'accéder à la plateforme et de s'o
 **À surveiller.**
 - Des chiffres qui diffèrent entre voisins : paquet, portée, niveau ou période. Faites-leur trouver lequel.
 - « La carte est cassée » : pas de fichiers de limites administratives sur l'instance. Dites-le dès le départ.
-- Les noms des modules en anglais dans l'interface française : un problème d'affichage connu.
 
 ## Pour conclure
 

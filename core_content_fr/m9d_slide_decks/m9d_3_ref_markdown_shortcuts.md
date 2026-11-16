@@ -4,20 +4,23 @@ theme: fastr
 paginate: true
 ---
 
-## Formater le texte de votre rapport — référence rapide
+## Mettre en forme le texte — référence rapide
 
-Vous pouvez formater le texte avec des symboles simples, comme pour écrire un message.
+Cliquez dans un bloc de texte : la barre d'outils apparaît au-dessus de la diapositive. Sélectionnez le texte, puis cliquez.
 
-| Symbole | Résultat |
-|---------|----------|
-| `# Titre` | Grand titre |
-| `## Sous-titre | Titre plus petit |
-| `**gras**` | **gras** |
-| Commencer une ligne par `-` (un tiret) | Point de puce |
-| Laisser une ligne vide | Espacement |
+| Commande de la barre | Ce qu'elle fait |
+|---|---|
+| **Texte normal ▾** (menu de styles) | Transformer la ligne en titre, ou la remettre en texte normal |
+| **B** / **I** | Gras ou italique pour les mots sélectionnés |
+| **•** / **1.** | Liste à puces ou liste numérotée, un élément par ligne |
+| **"** | Bloc de citation, pour une phrase reprise d'un rapport ou d'une directive |
+| Flèches d'annulation, ou Ctrl/Cmd+Z | Annuler la dernière modification |
+
+Rien à enregistrer : la présentation est **En direct** et chaque changement est conservé dans l'**Historique**.
 
 <!--
-NOTES DU PRÉSENTATEUR :
-- Garder cette diapo projetée pendant que les participants font l'activité « Format your report text ».
-- Les mêmes symboles fonctionnent dans l'éditeur de diapos et dans le chat de l'Assistant IA.
+NOTES POUR LE PRÉSENTATEUR :
+- Gardez cette diapositive projetée pendant l'activité Mettre en forme le texte de vos diapositives.
+- Les titres viennent du menu de styles, pas de symboles # tapés au clavier ; un symbole tapé reste un simple caractère.
+- L'éditeur de rapport a la même barre avec quelques commandes de plus (titres 1 à 3, taille du texte).
 -->

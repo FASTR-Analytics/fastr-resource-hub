@@ -1,26 +1,26 @@
-<!-- AUTO-TRANSLATED from core_content/m9d_slide_decks/m9d_3_ref_markdown_shortcuts.md -->
-<!-- Add REVIEWED marker after human review to protect from overwrite -->
-
 ---
 marp: true
 theme: fastr
 paginate: true
 ---
 
-## Formatar o texto do relatório - referência rápida
+## Formatar o texto — referência rápida
 
-Pode formatar o texto utilizando símbolos simples, tal como se estivesse a escrever uma mensagem.
+Clique num bloco de texto: a barra de ferramentas aparece acima do diapositivo. Selecione o texto e clique.
 
-| Símbolo | Resultado |
-|--------|--------|
-| `# Heading` | Título grande |
-| `## Subheading` | Título mais pequeno |
-| `**bold**` | **negrito** |
-| Iniciar uma linha com `-` (um hífen) | Ponto de bala |
-| Deixar uma linha em branco | Adicionar espaçamento |
+| Comando da barra | O que faz |
+|---|---|
+| **Texto normal ▾** (menu de estilos) | Transformar a linha num título, ou voltar a texto normal |
+| **B** / **I** | Negrito ou itálico para as palavras selecionadas |
+| **•** / **1.** | Lista com marcas ou lista numerada, um item por linha |
+| **"** | Bloco de citação, para uma frase retirada de um relatório ou de uma norma |
+| Setas de anular, ou Ctrl/Cmd+Z | Anular a última alteração |
+
+Nada para guardar: a apresentação está **Ao vivo** e cada alteração fica no **Histórico**.
 
 <!--
-NOTAS DO APRESENTADOR:
-- Mantenha este slide projetado enquanto os participantes trabalham na atividade Formatar o texto do seu relatório.
-- Os mesmos símbolos funcionam no editor de slides e no bate-papo do Assistente de IA.
+NOTAS PARA O APRESENTADOR:
+- Mantenha este diapositivo projetado durante a atividade Formatar o texto dos seus diapositivos.
+- Os títulos vêm do menu de estilos, não de símbolos # escritos; um símbolo escrito fica como simples carácter.
+- O editor de relatórios tem a mesma barra com alguns comandos a mais (títulos 1 a 3, tamanho do texto).
 -->

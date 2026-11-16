@@ -16,7 +16,7 @@ Quatre contrôles en haut :
 - **HMIS / FOSA** : la famille de données
 - **Paquet de résultats** (en haut à droite) : celui qui est épinglé est sélectionné
 - **Portée** : **Toutes les données**, c'est tout le pays
-- **Module** et **métrique** (à gauche) : s'ouvre sur **Indicator values → Volumes de services**
+- **Module** et **métrique** (à gauche) : s'ouvre sur **Utilisation des services → Volumes de services**
 
 </div>
 <div>

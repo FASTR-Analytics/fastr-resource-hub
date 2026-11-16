@@ -12,7 +12,7 @@ paginate: true
 ## Activité : Créez votre première visualisation
 
 **Ce que vous apprendrez**
-Comment filtre et désagrégation changent ce que dit un graphique, et quand utiliser un preset plutôt que Custom.
+Comment filtre et désagrégation changent ce que dit un graphique, et quand utiliser un préréglage plutôt que Personnalisé.
 
 **Ce que vous pratiquerez**
 - Construire une série temporelle des volumes mensuels CPN1
@@ -31,5 +31,5 @@ NOTES DU PRÉSENTATEUR :
   - Nous faisons : faire la même chose pour BCG (12 derniers mois) et l'enregistrer.
   - Vous faites : construire un graphique pour un indicateur de votre choix dans votre propre dossier.
 - Message clé : filtrez ce dont vous n'avez pas besoin, désagrégez ce que vous voulez comparer. Courbes pour les tendances, barres pour comparer.
-- À surveiller : confondre filtre et désagrégation ; passer en Custom alors qu'un préréglage suffirait.
+- À surveiller : confondre filtre et désagrégation ; passer en Personnalisé alors qu'un préréglage suffirait.
 -->

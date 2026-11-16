@@ -1,33 +1,30 @@
-<!-- AUTO-TRANSLATED from core_content/m9d_slide_decks/m9d_3_formatting_text.md -->
-<!-- Add REVIEWED marker after human review to protect from overwrite -->
-
 ---
 marp: true
 theme: fastr
 paginate: true
 ---
+
 <!-- _class: activity-pointer -->
 
 <div class="activity-pointer">
 
 ![h:90](../../resources/icons/hands_on.svg)
 
-## Atividade: Formatar o texto do relatório
+## Atividade: Formatar o texto dos seus diapositivos
 
-**O que vai aprender
-Os mesmos atalhos de markdown que funcionam no chat também funcionam no editor de slides. Pode adicionar cabeçalhos, texto a negrito e listas de marcadores.
+**O que vai aprender**
+O editor de texto tem uma barra de ferramentas: um menu de estilos para títulos, negrito e itálico, listas com marcas e numeradas, citação. Nenhum símbolo para escrever.
 
-**O que vai praticar
-- Adicionar um título ao seu diapositivo
-- Colocar uma frase-chave em negrito
-- Adicionar uma lista de marcadores
-- Guardar e pré-visualizar
+**O que vai praticar**
+- Transformar a primeira linha da sua interpretação num título
+- Pôr a negrito a única frase que transporta a mensagem
+- Dividir um parágrafo com várias ideias numa lista com marcas
 
 </div>
 
 <!--
-NOTAS DO APRESENTADOR:
-- Atividade adaptada do guia do facilitador m9d. Folha de apoio: h_m9d_format_text.
-- Segue-se um diapositivo de referência com os atalhos de markdown (m9d_3_ref_markdown_shortcuts); mantenha-o projetado enquanto os participantes trabalham.
-- Mostre aos participantes que os mesmos símbolos funcionam no editor de diapositivos e no chat.
+NOTAS PARA O APRESENTADOR:
+- Ficha: h_m9d_format_text. O diapositivo de referência que se segue mostra a barra de ferramentas; mantenha-o projetado enquanto os participantes trabalham.
+- Clique num bloco de texto para abrir o editor; a barra de ferramentas fica acima do diapositivo. Tudo se guarda enquanto escreve (Ao vivo).
+- O erro habitual é o excesso: uma frase a negrito por diapositivo, não três.
 -->

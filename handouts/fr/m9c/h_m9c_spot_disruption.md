@@ -32,7 +32,7 @@ Les cinq premiers documents enseignaient la technique. C'est ici que vous l'util
 
 ## Ce que vous allez faire
 
-Créer le graphique national des perturbations à partir du module Disruption detection, le réduire à un indicateur et à une période d'intérêt, parcourir le cadre en six étapes, puis rédiger un constat en trois parties à partager avec la salle.
+Créer le graphique national des perturbations à partir du module Détection des perturbations, le réduire à un indicateur et à une période d'intérêt, parcourir le cadre en six étapes, puis rédiger un constat en trois parties à partager avec la salle.
 
 </div>
 </div>
@@ -43,9 +43,9 @@ Créer le graphique national des perturbations à partir du module Disruption de
 
 <h2 class="step-h"><span class="step-n">1</span><span>Créer le graphique de perturbation</span></h2>
 
-Sur la page **Produits**, cliquez sur **Nouveau → Nouvelle visualisation**, gardez le paquet épinglé et **Toutes les données**, puis cliquez sur **Suivant**. À l'étape Métrique, cliquez sur le module **Disruption detection** (détection des perturbations), puis sur la carte **Bayesian disruption detection — observed vs expected with 95% CI**, choisissez le niveau **National**, et cliquez sur **Suivant**. Choisissez le préréglage **Graphique des perturbations avec bande de crédibilité à 95%** et cliquez sur **Insérer**.
+Sur la page **Produits**, cliquez sur **Nouveau → Nouvelle visualisation**, gardez le paquet épinglé et **Toutes les données**, puis cliquez sur **Suivant**. À l'étape Métrique, cliquez sur le module **Détection des perturbations** (détection des perturbations), puis sur la carte **Bayesian disruption detection — observed vs expected with 95% CI**, choisissez le niveau **National**, et cliquez sur **Suivant**. Choisissez le préréglage **Graphique des perturbations avec bande de crédibilité à 95%** et cliquez sur **Insérer**.
 
-![Étape Métrique avec Disruption detection sélectionné h:230](../../../resources/screenshots/platform_v2_fr/08_new_viz_module_metrics.png)
+![Étape Métrique avec Détection des perturbations sélectionné h:230](../../../resources/screenshots/platform_v2_fr/08_new_viz_module_metrics.png)
 
 > Déjà construit par un collègue ? La page Produits en contient peut-être un. Ouvrez-le, puis **⋮ → Dupliquer** pour que vos filtres ne changent pas les siens : les modifications s'enregistrent en direct.
 

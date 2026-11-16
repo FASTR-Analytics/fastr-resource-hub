@@ -97,7 +97,6 @@ No final, cada participante deve estar com sessão iniciada, ter uma pasta com o
 **Atenção a.**
 - Números diferentes entre vizinhos: pacote, âmbito, nível ou período. Faça-os descobrir qual.
 - «O mapa está avariado»: não há ficheiros de limites administrativos na instância. Diga-o de antemão.
-- Nomes dos módulos em inglês na interface em português: é um problema de apresentação conhecido.
 
 ## Para encerrar
 

@@ -26,7 +26,7 @@ Each module changes the metric list and the view. **Coverage estimates → Cover
 
 <!--
 PRESENTER NOTES:
-- Open the module dropdown on screen and read the two groups. Module names appear in English in the French interface: known display issue.
+- Open the module dropdown on screen and read the two groups.
 - Coverage chart colours are the same as in the methodology slides and in visualizations: grey HMIS, black survey, red projection.
 - Disruption detection → Observed and expected services shows the expected band and the months outside it.
 - Do not explain the methods here; the data quality, disruption and coverage modules each have a session.

@@ -8,9 +8,9 @@ footer: "FASTR · Présentations"
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-<div class="setup-breadcrumb"><span class="step done">Créer présentation</span> <span class="arrow">→</span> <span class="step done">Ajouter manuel</span> <span class="arrow">→</span> <span class="step done">Ajouter IA</span> <span class="arrow">→</span> <span class="step done">Éditer & finaliser</span> <span class="arrow">→</span> <span class="step current">Formater texte</span></div>
+<div class="setup-breadcrumb"><span class="step done">Créer la présentation</span> <span class="arrow">→</span> <span class="step done">Ajouter manuellement</span> <span class="arrow">→</span> <span class="step done">Ajouter avec l'IA</span> <span class="arrow">→</span> <span class="step done">Éditer et finaliser</span> <span class="arrow">→</span> <span class="step current">Mettre en forme</span></div>
 
-# Formater le texte de votre rapport
+# Mettre en forme le texte de vos diapositives
 
 <p class="meta-line"><strong>Activité</strong> · <strong>Présentations</strong> · <strong>~10 min</strong></p>
 
@@ -19,35 +19,25 @@ footer: "FASTR · Présentations"
 
 <p class="sb-label">Avant de commencer</p>
 
-- ☐ Vous avez une diapositive avec du texte d'interprétation qui a besoin d'une structure (titre, puces, ou un peu de gras)
-- ☐ La diapositive est ouverte dans l'éditeur
+- ☐ Une diapositive avec un bloc de texte d'interprétation, ouverte dans l'éditeur
+- ☐ Le texte compte au moins trois phrases (une ligne de titre, ce que l'on voit, ce que cela signifie)
 
 <p class="sb-label">Pourquoi c'est important</p>
 
-Un paragraphe brut cache le message. Un titre, quelques puces et une phrase en gras guident le lecteur dans l'ordre que vous voulez.
+Un paragraphe compact cache le message. Un titre, quelques puces et une phrase en gras guident le lecteur dans l'ordre voulu. La barre d'outils de l'éditeur fait tout cela en quelques clics ; il n'y a aucun symbole à taper.
 
 </aside>
 <div class="p1-main">
 
-## Les raccourcis
+## Ce que vous allez faire
 
-Vous pouvez formater le texte avec des symboles simples, comme dans un message. L'éditeur transforme les symboles en texte formaté à l'enregistrement.
+Donner au texte d'une diapositive un titre, une phrase en gras et une liste à puces, avec la barre d'outils.
 
-| Symbole | Résultat |
-|---------|----------|
-| `# Titre` | Grand titre |
-| `## Sous-titre` | Titre plus petit |
-| `**gras**` | **gras** |
-| Commencer une ligne par `-` (un tiret) | Point de puce |
-| Laisser une ligne vide | Espacement |
+<h2 class="step-h"><span class="step-n">1</span><span>Ouvrir l'éditeur de texte</span></h2>
 
-## Essayez
+Cliquez dans le bloc de texte de votre diapositive. La barre d'outils apparaît au-dessus de la diapositive : un menu de styles (**Texte normal**), **B** et **I**, listes à puces et numérotées, un bouton de citation et les flèches d'annulation. Rien à enregistrer : la présentation est **En direct**.
 
-1. Ouvrez une de vos diapositives existantes et cliquez dans la zone de texte.
-2. Transformez la première ligne en titre en ajoutant `## ` devant.
-3. Choisissez une phrase qui porte le message clé et entourez-la de `**…**` pour la mettre en gras.
-4. Si la diapositive contient plusieurs idées, séparez-les en puces en commençant chaque ligne par `- `.
-5. Enregistrez et vérifiez la diapositive rendue.
+![h:200](../../../resources/screenshots/platform_v2_fr/22c_block_selected.png)
 
 </div>
 </div>
@@ -56,22 +46,32 @@ Vous pouvez formater le texte avec des symboles simples, comme dans un message. 
 
 <div class="brand-line"><span class="rule"></span><img src="../../../resources/logos/FASTR_Primary_01_FullName.png" alt="FASTR" height="28"></div>
 
-## Point de contrôle
+<h2 class="step-h"><span class="step-n">2</span><span>Titre et mise en valeur</span></h2>
 
-Votre diapositive doit maintenant avoir :
+1. Placez le curseur sur la première ligne, celle qui énonce le constat, et choisissez un titre dans le **menu de styles**.
+2. Sélectionnez la seule phrase qui porte le message et cliquez sur **B**. Une phrase par diapositive ; une deuxième phrase en gras annule la première.
+3. Si une phrase reprend mot pour mot un rapport ou une directive, sélectionnez-la et cliquez sur le bouton de **citation**.
 
-- Un titre ou sous-titre qui dit de quoi parle la diapositive
+<h2 class="step-h"><span class="step-n">3</span><span>Listes et respiration</span></h2>
+
+1. Quand un paragraphe contient plusieurs faits, mettez chacun sur sa propre ligne, sélectionnez-les et cliquez sur le bouton **liste à puces**. Utilisez la **liste numérotée** pour des étapes qui se suivent.
+2. Relisez la diapositive à deux mètres, ou avec **Présenter**. Si l'œil ne tombe pas sur le titre, puis la phrase en gras, puis la liste, changez une chose à la fois avec les flèches d'annulation pour comparer.
+
+## Vérification
+
+Votre diapositive devrait maintenant avoir :
+
+- Un titre qui nomme le constat, pas le sujet
 - Des puces là où il y a une liste, plutôt qu'un seul paragraphe
-- Une ou deux phrases en gras pour insister (pas plus, sinon l'effet se perd)
+- Une phrase en gras, deux au maximum
 
-## Ce qui peut mal se passer
+## Que faire si ça ne marche pas
 
-- **Les symboles s'affichent encore sur la diapositive rendue** — vous avez probablement oublié l'espace après le `#` ou le `-`. Le raccourci a besoin de l'espace (`# Titre`, pas `#Titre`).
-- **Tout est en gras** — `**` entoure uniquement la phrase à mettre en avant, pas un paragraphe entier.
-- **Les puces sont collées** — laissez une ligne vide entre les puces et le paragraphe suivant pour ajouter de l'espace.
+- **Des symboles tapés apparaissent sur la diapositive** (un `#` ou un `-` en début de ligne). L'éditeur ne lit pas les symboles ; effacez-les et utilisez la barre d'outils.
+- **Tout est en gras.** Sélectionnez seulement la phrase, pas le paragraphe, avant de cliquer sur B.
+- **La liste n'a qu'une seule puce géante.** Chaque élément a besoin de sa propre ligne avant d'appliquer la liste.
+- **Un changement regretté.** Les flèches d'annulation pour les derniers gestes ; **Historique** dans la barre du haut pour restaurer une version antérieure complète.
 
-> 🔎 **Vérifier dans votre interface actuelle** : les mêmes symboles fonctionnent dans l'éditeur de diapositives et dans le chat de l'Assistant IA. Utilisez-les des deux côtés.
+## Étape suivante
 
-## Et ensuite
-
-L'activité suivante couvre les paramètres du rapport : nom, style, logos et numéros de page.
+L'activité suivante couvre les paramètres de la présentation : thème, logos, pied de page et partage.

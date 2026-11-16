@@ -35,7 +35,7 @@ Ce module apprend aux participants à lire un graphique et à dire ce qu'il sign
 
 ## Animer la session
 
-**Préparation.** Ayez une visualisation enregistrée et une présentation prêtes dans un dossier de démo pour montrer des graphiques immédiatement. Confirmez que les participants ont leur propre dossier (Prise en main) et que l'instance a un paquet de résultats épinglé contenant le module Disruption detection : l'activité 6 utilise des données pays réelles. Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur des duplicatas, jamais sur le graphique d'un participant.
+**Préparation.** Ayez une visualisation enregistrée et une présentation prêtes dans un dossier de démo pour montrer des graphiques immédiatement. Confirmez que les participants ont leur propre dossier (Prise en main) et que l'instance a un paquet de résultats épinglé contenant le module Détection des perturbations : l'activité 6 utilise des données pays réelles. Rappelez-vous que les modifications s'enregistrent en direct : démontrez sur des duplicatas, jamais sur le graphique d'un participant.
 
 **Comment démontrer.** Chaque tâche sur la plateforme doit être démontrée d'abord, puis pratiquée à partir du document, qui réexplique ce que vous avez montré. La démo détaillée du constructeur de graphiques (activité 2) est celle à répéter — elle porte la distinction filtrer/désagréger dont dépend le reste du module.
 
@@ -65,7 +65,7 @@ Ce module apprend aux participants à lire un graphique et à dire ce qu'il sign
 
 ### 2. Créez votre première visualisation · ~15 min · pratique
 
-**Le déroulé.** Les participants construisent un graphique avec le constructeur intégré : **Nouveau → Nouvelle visualisation** sur la page Produits, gardez le paquet et la portée, puis la boîte de dialogue **Métrique → Préréglages → Configurer** (*Indicator values → Indicator value → Personnalisé → Série temporelle → Insérer*). Le document explique ensuite **filtrer vs désagréger** et les modes d'affichage (Lignes / Grille / Rangées / Colonnes / Graphiques différents), et enseigne **dupliquer avant de modifier**, puisqu'il n'y a pas d'enregistrement sous un autre nom : les modifications s'enregistrent en direct.
+**Le déroulé.** Les participants construisent un graphique avec le constructeur intégré : **Nouveau → Nouvelle visualisation** sur la page Produits, gardez le paquet et la portée, puis la boîte de dialogue **Métrique → Préréglages → Configurer** (*Utilisation des services → Valeur de l'indicateur → Personnalisé → Série temporelle → Insérer*). Le document explique ensuite **filtrer vs désagréger** et les modes d'affichage (Lignes / Grille / Rangées / Colonnes / Graphiques différents), et enseigne **dupliquer avant de modifier**, puisqu'il n'y a pas d'enregistrement sous un autre nom : les modifications s'enregistrent en direct.
 
 **Démontrer (~3 min, en direct).** Ouvrez un duplicata d'une viz enregistrée et utilisez l'onglet **Données** à gauche :
 1. Partez d'un seul indicateur, total national ; dites en mots ce qu'il montre.
@@ -80,7 +80,7 @@ Ce module apprend aux participants à lire un graphique et à dire ce qu'il sign
 **À surveiller.**
 - Confondre **filtrer** (choisir ce qu'on affiche) et **désagréger** (décomposer un total en ses parties) — la distinction sous-tend chaque graphique.
 - S'attendre à un bouton d'enregistrement. Il n'y en a pas : le titre en haut permet de renommer, **Historique** de restaurer, et **Dupliquer** sur la page Produits est la façon de garder un original.
-- Choisir le préréglage de la métrique Indicator value (un tableau de type tableau de bord) et se demander où est la courbe : pour une tendance, il leur faut **Personnalisé → Série temporelle**.
+- Choisir le préréglage Tableau de bord de la métrique Valeur de l'indicateur et se demander où est la courbe : pour une tendance, il leur faut **Personnalisé → Série temporelle**.
 
 ---
 
@@ -134,7 +134,7 @@ Ce module apprend aux participants à lire un graphique et à dire ce qu'il sign
 
 ### 6. Application — repérer une perturbation · ~25 min · équipes pays
 
-**Le déroulé.** La synthèse : avec de vraies données pays, les équipes créent le graphique national du module **Disruption detection** (observé vs attendu avec la bande de crédibilité à 95%), filtrent à un indicateur, appliquent le cadre en six étapes, ajoutent le contexte local, rédigent un constat en trois parties, et le partagent avec la salle.
+**Le déroulé.** La synthèse : avec de vraies données pays, les équipes créent le graphique national du module **Détection des perturbations** (observé vs attendu avec la bande de crédibilité à 95%), filtrent à un indicateur, appliquent le cadre en six étapes, ajoutent le contexte local, rédigent un constat en trois parties, et le partagent avec la salle.
 
 **Démontrer.** Rien de nouveau à démontrer — ceci applique tout le module. Mettez-la en place en rappelant aux équipes les six étapes et la structure de constat en trois parties.
 

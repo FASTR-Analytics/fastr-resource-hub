@@ -117,7 +117,6 @@ O Explorar serve para **olhar**: rápido, completo, nada guardado. Uma **visuali
 - **A tabela está vazia.** O pacote não tem dados para o período escolhido. Defina o período para **Tudo**.
 - **Os números diferem dos de um colega.** Verifique o pacote (canto superior direito), o âmbito, o nível e o período. Quatro filtros, quatro formas de diferir.
 - **Não há mapa.** Não foram carregados ficheiros de limites administrativos para esse nível. Use a tabela ou os gráficos.
-- **Os nomes dos módulos aparecem em inglês**, mesmo na interface em português. É um problema de apresentação conhecido; o conteúdo é o mesmo.
 
 ## A seguir
 

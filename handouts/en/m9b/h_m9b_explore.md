@@ -117,7 +117,6 @@ Explore is for **looking**: quick, complete, nothing saved. A **visualization** 
 - **The table is empty.** The package has no data for the period chosen. Set the period to **All**.
 - **Numbers differ from a colleague's.** Check the package (top right), the scope, the level and the period. Four filters, four ways to differ.
 - **No map.** No boundary files uploaded for that level. Use the table or the charts.
-- **The module names are in English** even in the French interface. That is a known display issue; the content is the same.
 
 ## What's next
 

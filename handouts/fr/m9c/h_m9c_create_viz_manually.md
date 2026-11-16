@@ -46,15 +46,15 @@ Sur la page **Produits**, cliquez sur **Nouveau**, puis sur **Nouvelle visualisa
 
 <h2 class="step-h"><span class="step-n">2</span><span>Choisir l'indicateur</span></h2>
 
-La boîte de dialogue **Insérer une visualisation** comporte trois étapes : **Métrique**, **Préréglages**, **Configurer**. La colonne de gauche liste les modules d'analyse par leur nom. Cliquez sur **Indicator values** (Valeurs des indicateurs), puis sur la carte de métrique **Indicator value**, et choisissez le niveau géographique **National** sur la carte. Cliquez sur **Suivant**.
+La boîte de dialogue **Insérer une visualisation** comporte trois étapes : **Métrique**, **Préréglages**, **Configurer**. La colonne de gauche liste les modules d'analyse par leur nom. Cliquez sur **Utilisation des services** (Valeurs des indicateurs), puis sur la carte de métrique **Valeur de l'indicateur**, et choisissez le niveau géographique **National** sur la carte. Cliquez sur **Suivant**.
 
 ![h:300](../../../resources/screenshots/platform_v2_fr/08b_new_viz_indicator_value.png)
 
-> Une **métrique**, c'est *ce qui est mesuré*. La métrique Indicator value contient le décompte mensuel de chaque indicateur de l'instance. Un **préréglage**, c'est une façon prête à l'emploi de dessiner une métrique. Chaque module regroupe les métriques qu'il produit ; **Résultats principaux** montre les plus utilisées, tous modules confondus.
+> Une **métrique**, c'est *ce qui est mesuré*. La métrique Valeur de l'indicateur contient le décompte mensuel de chaque indicateur de l'instance. Un **préréglage**, c'est une façon prête à l'emploi de dessiner une métrique. Chaque module regroupe les métriques qu'il produit ; **Résultats principaux** montre les plus utilisées, tous modules confondus.
 
 <h2 class="step-h"><span class="step-n">3</span><span>Choisir comment la dessiner</span></h2>
 
-La métrique Indicator value propose un seul préréglage, **Scorecard table**, qui n'est pas ce que vous voulez ici. Cliquez sur **Personnalisé**, puis sur **Suivant**. À l'étape **Configurer**, choisissez **Série temporelle** et cliquez sur **Insérer**.
+La métrique Valeur de l'indicateur propose des préréglages (dont le tableau de bord et les valeurs dans le temps) ; pour apprendre l'éditeur, passez par la voie manuelle. Cliquez sur **Personnalisé**, puis sur **Suivant**. À l'étape **Configurer**, choisissez **Série temporelle** et cliquez sur **Insérer**.
 
 ![h:220](../../../resources/screenshots/platform_v2_fr/10_new_viz_configure.png)
 
@@ -149,8 +149,8 @@ Dupliquez votre graphique BCG et décomposez-le de la même façon. Vous devriez
 
 Une fois vos graphiques enregistrés, démarrez une autre **Nouvelle visualisation** et regardez les autres modules à l'étape Métrique :
 
-- **Coverage estimates** (estimations de couverture) : une courbe de couverture plutôt qu'une tendance de volume.
-- **Disruption detection** (détection des perturbations) : l'observé face à l'attendu, avec la bande de crédibilité (la dernière activité de cette série l'utilise).
+- **Estimations de couverture** : une courbe de couverture plutôt qu'une tendance de volume.
+- **Détection des perturbations** : l'observé face à l'attendu, avec la bande de crédibilité (la dernière activité de cette série l'utilise).
 - **Explorer**, dans la navigation latérale, montre un graphique déjà prêt pour chaque module sans rien créer. Utile pour voir ce qu'un module produit avant de construire avec lui.
 
 > **Astuce :** une série temporelle convient mieux à une tendance. Un graphique en barres compare des périodes ou des lieux. Le document de référence *Comment lire une visualisation FASTR* approfondit.
