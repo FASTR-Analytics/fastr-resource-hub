@@ -2,7 +2,7 @@ slides:
 - file: mai_1_ai_assistant_overview.md
   order: 1.0
   variant: full
-  title: ''
+  title: L'assistant IA
 - file: mai_2_ai_assistant_capabilities.md
   order: 2.0
   variant: full

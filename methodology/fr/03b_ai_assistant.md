@@ -74,8 +74,7 @@ L'IA est un accélérateur, pas un décideur. Vous gardez le contrôle du jugeme
 -->
 
 <!-- SLIDE:mai_1 -->
-#<!-- REVIEWED -->
-# L'assistant IA
+## L'assistant IA
 
 La plateforme FASTR inclut un assistant IA qui fournit un support à la demande pour l'interprétation des données et la génération de rapports.
 

@@ -4,8 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-#<!-- REVIEWED -->
-# L'assistant IA
+## L'assistant IA
 
 La plateforme FASTR inclut un assistant IA qui fournit un support à la demande pour l'interprétation des données et la génération de rapports.
 
