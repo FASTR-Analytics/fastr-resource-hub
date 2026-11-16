@@ -11,10 +11,10 @@ paginate: true
 
 Le menu **module** a deux groupes :
 
-- **Résultats principaux** : Utilisation des services (les volumes)
+- **Résultats principaux** : Utilisation des services
 - **Analyses complémentaires** : Évaluation de la qualité des données, Ajustements de la qualité des données, Détection des perturbations, Dénominateurs de couverture, Estimations de couverture
 
-Chaque module change les métriques et la vue. **Estimations de couverture → Couverture dans le temps** trace un graphique par indicateur : gris à partir des données de routine, noir pour les enquêtes, rouge pour la projection.
+**Estimations de couverture → Couverture dans le temps** : un graphique par indicateur, gris pour la routine, noir pour les enquêtes, rouge pour la projection.
 
 </div>
 <div>
