@@ -11,7 +11,7 @@ paginate: true
 
 **Visualisations** — explorer et comprendre vos données
 
-- Accéder à toutes les visualisations sauvegardées du projet
+- Travailler sur la visualisation ouverte, ou insérer n'importe quelle visualisation enregistrée dans une présentation
 - Examiner les données sous-jacentes de tout graphique
 - Modifier les paramètres : type de graphique, filtres, période, niveau de désagrégation
 - Recevoir une explication de ce que la visualisation représente

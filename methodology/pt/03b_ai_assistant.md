@@ -1,5 +1,5 @@
-<!-- AUTO-TRANSLATED from 03b_ai_assistant.md -->
-<!-- Add REVIEWED marker after human review to protect from overwrite -->
+<!-- REVIEWED -->
+<!-- Revisto à mão em 2026-11-16 para a plataforma 2.x -->
 
 # O assistente de IA
 
@@ -17,7 +17,7 @@ O assistente de IA pode consultar métricas e indicadores a partir de módulos d
 
 ### Visualização e exibição
 
-O assistente pode apresentar visualizações de projectos existentes e trabalhar com replicantes de gráficos multi-variantes. Pode criar novas configurações de gráficos, tais como gráficos de barras, gráficos de linhas e tabelas, e combinar gráficos, tabelas e texto narrativo.
+O assistente trabalha dentro do produto que tem aberto. Numa visualização, muda a métrica, o tipo de gráfico, os filtros e a desagregação e atualiza a figura ao vivo; numa apresentação ou num relatório, constrói e edita diapositivos e texto, e pode inserir visualizações guardadas a partir da página Produtos. Na própria página Produtos só consegue listar produtos, porque nenhum pacote de resultados está aberto aí.
 
 ### Conhecimento e documentação
 
@@ -39,7 +39,7 @@ A sua conversa com a IA, as perguntas que faz e as respostas que recebe são pri
 
 ### O que é partilhado
 
-Os dados subjacentes (os mesmos dados do HMIS), as visualizações guardadas na biblioteca do projeto, as apresentações de diapositivos e os relatórios que cria e guarda, bem como as definições do projeto e os resultados do módulo são partilhados com a equipa. Todos podem ver o conteúdo guardado.
+Os dados subjacentes, os pacotes de resultados e todas as visualizações, apresentações e relatórios guardados na página Produtos são partilhados com a equipa, segundo as definições de acesso de cada produto. Quem pode abrir um produto vê o que a IA nele alterou.
 
 ## Onde a IA oferece maior valor
 
@@ -122,7 +122,7 @@ A plataforma FASTR inclui um assistente de IA que fornece suporte sob demanda pa
 
 **Visualizações** - Explore e compreenda os seus dados
 
-- Aceder a todas as visualizações guardadas no projeto
+- Trabalhar na visualização aberta, ou inserir qualquer visualização guardada numa apresentação
 - Rever os dados subjacentes de qualquer gráfico ou figura
 - Modificar os parâmetros de visualização, incluindo o tipo de gráfico, filtros, períodos de tempo e níveis de desagregação
 - Receber explicações sobre o que cada visualização representa
@@ -209,13 +209,13 @@ NOTAS DO APRESENTADOR:
 | Conteúdo | Salvo? | Notas |
 |---------|--------|-------|
 | A sua conversa de IA | Temporária | As conversas de IA são guardadas localmente no browser e são visíveis apenas para a pessoa que está a utilizar esse browser. Atualizar a página ou fechar o separador não elimina a conversa. O histórico de conversas só desaparece se a cache do browser for limpa ou se for utilizado um browser ou dispositivo diferente. |
-| Apresentações de diapositivos/relatórios criados por si | Permanente | Guardado no projeto, visível para a equipa |
-| Visualizações salvas | Permanentes | Permanecem na biblioteca do projeto |
+| Apresentações de diapositivos/relatórios criados por si | Permanente | Na página Produtos, visível para quem tem acesso |
+| Visualizações guardadas | Permanente | Permanecem na página Produtos |
 | Exportações descarregadas | Permanentes | Guardadas no seu computador |
 <!-- /SLIDE -->
 
 <!-- SLIDE:mai_8a -->
-## Privado vs partilhado em projectos de equipa
+## Privado ou partilhado na página Produtos da equipa
 
 <div class="columns">
 <div>
@@ -223,21 +223,20 @@ NOTAS DO APRESENTADOR:
 **Privado para si:**
 
 - A sua conversa com a IA
-- Perguntas que faz e respostas que recebe
+- As perguntas que faz e as respostas que recebe
 
-Os outros membros da equipa não podem ver o que está a explorar.
+Os outros membros da equipa não veem o que está a explorar.
 
 </div>
 <div>
 
 **Partilhado com a equipa:**
 
-- Os dados subjacentes (os mesmos dados HMIS)
-- Visualizações guardadas na biblioteca do projeto
-- Diapositivos/relatórios que cria e guarda
-- Definições do projeto e resultados do módulo
+- Os dados subjacentes e os pacotes de resultados
+- As visualizações, apresentações e relatórios guardados na página Produtos
+- O que a IA alterou num produto, no momento em que o altera
 
-Todos podem ver o conteúdo guardado.
+Quem tem acesso a um produto vê-o.
 
 </div>
 </div>
@@ -249,7 +248,7 @@ Todos podem ver o conteúdo guardado.
 | Quem | Ação | Resultado |
 |-----|--------|--------|
 | Dra. Amina** (Diretora) Pergunta à IA sobre a cobertura, explora em privado, cria uma apresentação de diapositivos
-| Pergunta à IA sobre as lacunas nos relatórios, guarda um gráfico | Gráfico na biblioteca para todos | **Mohamed** (Gestor de dados)
+| Pergunta à IA sobre as lacunas nos relatórios, guarda um gráfico | Gráfico na página Produtos para a equipa | **Mohamed** (Gestor de dados)
 | Fátima** (responsável pelo programa) abre os diapositivos da Amina, usa o gráfico do Mohamed e pede à IA para explicar
 
 **O que cada pessoa vê:**

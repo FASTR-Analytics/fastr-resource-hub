@@ -11,7 +11,7 @@ paginate: true
 
 **Visualizations** — Explore and understand your data
 
-- Access all saved visualizations within the project
+- Work on the visualization you have open, or insert any saved one into a deck
 - Review underlying data for any chart or figure
 - Modify visualization parameters including chart type, filters, time periods, and disaggregation levels
 - Receive explanations of what each visualization represents

@@ -1,3 +1,5 @@
+<!-- REVIEWED -->
+
 # L'assistant IA
 
 ## Aperçu
@@ -14,7 +16,7 @@ L'assistant IA peut interroger les métriques et indicateurs des modules d'analy
 
 ### Visualisation et affichage
 
-L'assistant peut afficher les visualisations existantes du projet et travailler avec des réplicants de graphiques multi-variantes. Il peut créer de nouvelles configurations de graphiques comme des diagrammes à barres, des courbes et des tableaux, et combiner graphiques, tableaux et texte narratif.
+L'assistant travaille dans le produit que vous avez ouvert. Dans une visualisation, il change la métrique, le type de graphique, les filtres et la désagrégation et met la figure à jour en direct ; dans une présentation ou un rapport, il construit et modifie des diapositives et du texte, et peut insérer des visualisations enregistrées depuis la page Produits. Sur la page Produits elle-même, il ne peut que lister les produits, puisqu'aucun paquet de résultats n'y est ouvert.
 
 ### Connaissances et documentation
 
@@ -36,7 +38,7 @@ Votre conversation avec l'IA, et les questions que vous posez et les réponses q
 
 ### Ce qui est partagé
 
-Les données sous-jacentes (mêmes données SNIS), les visualisations sauvegardées dans la bibliothèque du projet, les présentations et rapports que vous créez et sauvegardez, et les paramètres du projet et résultats des modules sont partagés avec l'équipe. Tout le monde peut voir le contenu sauvegardé.
+Les données sous-jacentes, les paquets de résultats, et chaque visualisation, présentation et rapport enregistrés sur la page Produits sont partagés avec l'équipe, selon les réglages d'accès de chaque produit. Quiconque peut ouvrir un produit voit ce que l'IA y a changé.
 
 ## Là où l'IA apporte le plus de valeur
 
@@ -72,7 +74,8 @@ L'IA est un accélérateur, pas un décideur. Vous gardez le contrôle du jugeme
 -->
 
 <!-- SLIDE:mai_1 -->
-## L'assistant IA
+#<!-- REVIEWED -->
+# L'assistant IA
 
 La plateforme FASTR inclut un assistant IA qui fournit un support à la demande pour l'interprétation des données et la génération de rapports.
 
@@ -119,7 +122,7 @@ La plateforme FASTR inclut un assistant IA qui fournit un support à la demande 
 
 **Visualisations** — explorer et comprendre vos données
 
-- Accéder à toutes les visualisations sauvegardées du projet
+- Travailler sur la visualisation ouverte, ou insérer n'importe quelle visualisation enregistrée dans une présentation
 - Examiner les données sous-jacentes de tout graphique
 - Modifier les paramètres : type de graphique, filtres, période, niveau de désagrégation
 - Recevoir une explication de ce que la visualisation représente
@@ -206,13 +209,13 @@ NOTES POUR LE FACILITATEUR :
 | Contenu | Sauvegardé ? | Notes |
 |---------|--------------|-------|
 | Votre conversation IA | Temporaire | Les conversations IA sont sauvegardées localement dans le navigateur et visibles uniquement par la personne qui utilise ce navigateur. Rafraîchir la page ou fermer l'onglet n'efface pas la conversation. L'historique disparaît seulement si le cache du navigateur est vidé ou qu'un autre navigateur ou appareil est utilisé. |
-| Présentations / rapports que vous créez | Permanent | Sauvegardés dans le projet, visibles par l'équipe |
-| Visualisations sauvegardées | Permanent | Restent dans la bibliothèque du projet |
+| Présentations / rapports que vous créez | Permanent | Sur la page Produits, visibles par quiconque y a accès |
+| Visualisations sauvegardées | Permanent | Restent sur la page Produits |
 | Exports téléchargés | Permanent | Sauvegardés sur votre ordinateur |
 <!-- /SLIDE -->
 
 <!-- SLIDE:mai_8a -->
-## Privé vs partagé sur les projets d'équipe
+## Privé ou partagé sur la page Produits de l'équipe
 
 <div class="columns">
 <div>
@@ -220,21 +223,20 @@ NOTES POUR LE FACILITATEUR :
 **Privé pour vous :**
 
 - Votre conversation avec l'IA
-- Les questions que vous posez et les réponses reçues
+- Les questions que vous posez et les réponses que vous recevez
 
-Les autres membres de l'équipe ne peuvent pas voir ce que vous explorez.
+Les autres membres de l'équipe ne voient pas ce que vous explorez.
 
 </div>
 <div>
 
 **Partagé avec l'équipe :**
 
-- Les données sous-jacentes (mêmes données SNIS)
-- Visualisations sauvegardées dans la bibliothèque
-- Présentations et rapports que vous créez et sauvegardez
-- Paramètres du projet et résultats des modules
+- Les données sous-jacentes et les paquets de résultats
+- Les visualisations, présentations et rapports enregistrés sur la page Produits
+- Ce que l'IA a changé dans un produit, au moment où elle le change
 
-Tout le monde peut voir le contenu sauvegardé.
+Quiconque a accès à un produit le voit.
 
 </div>
 </div>
@@ -246,7 +248,7 @@ Tout le monde peut voir le contenu sauvegardé.
 | Qui | Action | Résultat |
 |-----|--------|----------|
 | **Dr Amina** (directrice) | Demande à l'IA la couverture, explore en privé, crée une présentation | Présentation visible par tous |
-| **Mohamed** (gestionnaire données) | Demande les lacunes de rapportage, sauvegarde un graphique | Graphique dans la bibliothèque pour tous |
+| **Mohamed** (gestionnaire données) | Demande les lacunes de rapportage, sauvegarde un graphique | Graphique sur la page Produits pour l'équipe |
 | **Fatima** (chargée de programme) | Ouvre les diapos d'Amina, utilise le graphique de Mohamed, demande à l'IA d'expliquer | Reçoit une explication privée |
 
 **Ce que chacun voit :**

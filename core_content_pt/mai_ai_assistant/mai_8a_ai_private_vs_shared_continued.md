@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Privado vs partilhado em projectos de equipa
+## Privado ou partilhado na página Produtos da equipa
 
 <div class="columns">
 <div>
@@ -12,21 +12,20 @@ paginate: true
 **Privado para si:**
 
 - A sua conversa com a IA
-- Perguntas que faz e respostas que recebe
+- As perguntas que faz e as respostas que recebe
 
-Os outros membros da equipa não podem ver o que está a explorar.
+Os outros membros da equipa não veem o que está a explorar.
 
 </div>
 <div>
 
 **Partilhado com a equipa:**
 
-- Os dados subjacentes (os mesmos dados HMIS)
-- Visualizações guardadas na biblioteca do projeto
-- Diapositivos/relatórios que cria e guarda
-- Definições do projeto e resultados do módulo
+- Os dados subjacentes e os pacotes de resultados
+- As visualizações, apresentações e relatórios guardados na página Produtos
+- O que a IA alterou num produto, no momento em que o altera
 
-Todos podem ver o conteúdo guardado.
+Quem tem acesso a um produto vê-o.
 
 </div>
 </div>

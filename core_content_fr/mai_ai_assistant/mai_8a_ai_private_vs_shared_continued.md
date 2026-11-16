@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Privé vs partagé sur les projets d'équipe
+## Privé ou partagé sur la page Produits de l'équipe
 
 <div class="columns">
 <div>
@@ -12,21 +12,20 @@ paginate: true
 **Privé pour vous :**
 
 - Votre conversation avec l'IA
-- Les questions que vous posez et les réponses reçues
+- Les questions que vous posez et les réponses que vous recevez
 
-Les autres membres de l'équipe ne peuvent pas voir ce que vous explorez.
+Les autres membres de l'équipe ne voient pas ce que vous explorez.
 
 </div>
 <div>
 
 **Partagé avec l'équipe :**
 
-- Les données sous-jacentes (mêmes données SNIS)
-- Visualisations sauvegardées dans la bibliothèque
-- Présentations et rapports que vous créez et sauvegardez
-- Paramètres du projet et résultats des modules
+- Les données sous-jacentes et les paquets de résultats
+- Les visualisations, présentations et rapports enregistrés sur la page Produits
+- Ce que l'IA a changé dans un produit, au moment où elle le change
 
-Tout le monde peut voir le contenu sauvegardé.
+Quiconque a accès à un produit le voit.
 
 </div>
 </div>

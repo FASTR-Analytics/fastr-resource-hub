@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Private vs shared on team projects
+## Private vs shared on the team's Products page
 
 <div class="columns">
 <div>
@@ -21,12 +21,11 @@ Other team members cannot see what you're exploring.
 
 **Shared with team:**
 
-- The underlying data (same HMIS data)
-- Saved visualizations in project library
-- Slide decks/reports you create and save
-- Project settings and module results
+- The underlying data and the results packages
+- Visualizations, slide decks and reports saved on the Products page
+- What the AI changed in a product, the moment it changed it
 
-Everyone can see saved content.
+Everyone with access to a product sees it.
 
 </div>
 </div>

@@ -12,12 +12,12 @@ paginate: true
 |---|---|---|
 | **1. Definir** | Dados → HMIS → Indicadores | **Adicionar indicador** → tipo **Calculado** → fórmula, p. ex. `anc4 / anc1` |
 | **2. Definir a regra** | Mesmo formulário, **Análise e apresentação** | **Formato**, **Direção**, **Meta**, **Regra de formatação condicional** (limiares, p. ex. 70 e 80) |
-| **3. Gerar** | Resultados → Gerar novo pacote de resultados | Assinalar **Valores dos indicadores**; fixar ou anexar o pacote ao projeto |
-| **4. Construir a tabela** | Projeto → **Criar visualização** | Módulo **Valores dos indicadores** → métrica **Valor do indicador** → predefinição **Tabela scorecard** → **Formatação condicional: Indicador** |
+| **3. Gerar** | Resultados → Gerar novo pacote de resultados | Assinalar **Valores dos indicadores**; fixá-lo e mover os produtos para ele (**⋮ → Pacote de resultados e âmbito…**) |
+| **4. Construir a tabela** | Produtos → **Novo → Nova visualização** | Módulo **Valores dos indicadores** → métrica **Valor do indicador** → predefinição **Tabela scorecard** → **Apresentação → Formatação condicional: Indicador** |
 
 </div>
 
-Cada célula é colorida pela regra do seu próprio indicador, e a legenda mostra as faixas. Guarde e adicione a tabela a um painel, a um relatório ou a um conjunto de diapositivos.
+Cada célula é colorida pela regra do seu próprio indicador, e a legenda mostra as faixas. Guarda-se sozinha na sua pasta; insira uma cópia num relatório ou numa apresentação.
 
 <!--
 NOTAS PARA O APRESENTADOR:

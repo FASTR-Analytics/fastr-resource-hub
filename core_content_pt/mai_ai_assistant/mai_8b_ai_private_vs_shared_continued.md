@@ -9,7 +9,7 @@ paginate: true
 | Quem | Ação | Resultado |
 |-----|--------|--------|
 | Dra. Amina** (Diretora) Pergunta à IA sobre a cobertura, explora em privado, cria uma apresentação de diapositivos
-| Pergunta à IA sobre as lacunas nos relatórios, guarda um gráfico | Gráfico na biblioteca para todos | **Mohamed** (Gestor de dados)
+| Pergunta à IA sobre as lacunas nos relatórios, guarda um gráfico | Gráfico na página Produtos para a equipa | **Mohamed** (Gestor de dados)
 | Fátima** (responsável pelo programa) abre os diapositivos da Amina, usa o gráfico do Mohamed e pede à IA para explicar
 
 **O que cada pessoa vê:**

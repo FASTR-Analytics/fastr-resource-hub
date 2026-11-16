@@ -12,12 +12,12 @@ paginate: true
 |---|---|---|
 | **1. Définir** | Données → SNIS → Indicateurs | **Ajouter un indicateur** → type **Calculé** → formule, p. ex. `anc4 / anc1` |
 | **2. Régler la règle** | Même formulaire, **Analyse et affichage** | **Format**, **Direction**, **Cible**, **Règle de mise en forme conditionnelle** (seuils, p. ex. 70 et 80) |
-| **3. Générer** | Résultats → Générer un nouveau paquet de résultats | Cocher **Valeurs des indicateurs** ; épingler ou rattacher le paquet au projet |
-| **4. Construire la table** | Projet → **Créer une visualisation** | Module **Valeurs des indicateurs** → mesure **Valeur de l'indicateur** → préréglage **Tableau de bord** → **Mise en forme conditionnelle : Indicateur** |
+| **3. Générer** | Résultats → Générer un nouveau paquet de résultats | Cocher **Valeurs des indicateurs** ; l'épingler, et y déplacer les produits (**⋮ → Paquet de résultats et portée…**) |
+| **4. Construire la table** | Produits → **Nouveau → Nouvelle visualisation** | Module **Valeurs des indicateurs** → mesure **Valeur de l'indicateur** → préréglage **Tableau de bord** → **Présentation → Mise en forme conditionnelle : Indicateur** |
 
 </div>
 
-Chaque cellule est colorée selon la règle de son propre indicateur, et la légende montre les tranches. Enregistrez, puis ajoutez la table à un tableau de bord, un rapport ou un diaporama.
+Chaque cellule est colorée selon la règle de son propre indicateur, et la légende montre les tranches. Elle s'enregistre toute seule dans votre dossier ; insérez-en une copie dans un rapport ou une présentation.
 
 <!--
 NOTES POUR LE PRÉSENTATEUR :

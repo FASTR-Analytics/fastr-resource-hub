@@ -1,5 +1,5 @@
-<!-- AUTO-TRANSLATED from 07_results_communication.md -->
-<!-- Add REVIEWED marker after human review to protect from overwrite -->
+<!-- REVIEWED -->
+<!-- Section « Construire un tableau de bord » revue à la main le 2026-11-16 pour la plateforme 2.x -->
 
 # Communication des résultats et utilisation des données
 
@@ -225,9 +225,9 @@ Un tableau de bord (scorecard) est une table d'indicateurs par zone, chaque cell
 
 **2. Régler les règles d'affichage sur chaque indicateur.** Dans le même formulaire, sous **Analyse et affichage**, réglez le **Format** (nombre, pourcentage ou taux pour 10 000), la **Direction** (**Plus élevé = meilleur** ou **Plus bas = meilleur**), une **Cible** facultative, et la **Règle de mise en forme conditionnelle** : des seuils croissants qui définissent les tranches, par exemple 70 et 80 pour une couverture où moins de 70 % est rouge, de 70 à 80 % jaune et plus de 80 % vert. La règle appartient à l'indicateur ; chaque tableau de bord qui le montre le colore de la même façon.
 
-**3. Générer un paquet de résultats avec Valeurs des indicateurs.** Les indicateurs calculés n'ont pas de valeurs tant que le module **Valeurs des indicateurs** n'a pas tourné. Générez un paquet de résultats (**Résultats → Générer un nouveau paquet de résultats**) avec ce module coché, puis épinglez-le ou rattachez-le au projet. Les modifications de formules, de seuils ou de chiffres de population prennent effet dans le paquet suivant, pas dans le paquet courant.
+**3. Générer un paquet de résultats avec Valeurs des indicateurs.** Les indicateurs calculés n'ont pas de valeurs tant que le module **Valeurs des indicateurs** n'a pas tourné. Générez un paquet de résultats (**Résultats → Générer un nouveau paquet de résultats**) avec ce module coché, puis épinglez-le ; les produits qui doivent montrer les nouvelles valeurs y sont déplacés avec **Paquet de résultats et portée…** dans leur menu. Les modifications de formules, de seuils ou de chiffres de population prennent effet dans le paquet suivant, pas dans le paquet courant.
 
-**4. Créer la table dans le projet.** Dans le projet, cliquez sur **Créer une visualisation**, choisissez le module **Valeurs des indicateurs**, la mesure **Valeur de l'indicateur** et le préréglage **Tableau de bord**. La table liste les indicateurs par zone pour la période choisie. Dans le panneau de style, mettez la **Mise en forme conditionnelle** sur **Indicateur** : chaque valeur est alors colorée selon la règle de son propre indicateur, et la légende montre les tranches. Enregistrez la visualisation, puis ajoutez-la à un tableau de bord, un rapport ou un diaporama comme n'importe quelle autre.
+**4. Créer la table comme visualisation.** Sur la page **Produits**, cliquez sur **Nouveau → Nouvelle visualisation**, confirmez le paquet et la portée, puis choisissez le module **Valeurs des indicateurs**, la mesure **Valeur de l'indicateur** et le préréglage **Tableau de bord**. La table liste les indicateurs par zone pour la période choisie. Dans l'onglet **Présentation**, mettez la **Mise en forme conditionnelle** sur **Indicateur** : chaque valeur est alors colorée selon la règle de son propre indicateur, et la légende montre les bandes. La visualisation s'enregistre toute seule dans votre dossier ; insérez-en une copie dans un rapport ou une présentation comme n'importe quelle autre.
 
 Deux habitudes gardent un tableau de bord fiable. Décidez les seuils avec le programme, et notez d'où ils viennent, parce que ce sont les couleurs qui portent le message. Et vérifiez le Registre avant chaque paquet, parce qu'un indicateur à mois manquants affiche une valeur trompeuse plutôt qu'une cellule vide.
 

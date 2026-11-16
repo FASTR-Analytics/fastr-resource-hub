@@ -14,7 +14,7 @@ The AI assistant can query metrics and indicators from installed analysis module
 
 ### Visualization and display
 
-The assistant can display existing project visualizations and work with replicants of multi-variant charts. It can create new chart configurations such as bar charts, line graphs, and tables, and combine charts, tables, and narrative text.
+The assistant works inside the product you have open. In a visualization it changes the metric, the chart type, the filters and the disaggregation and updates the figure live; in a slide deck or a report it builds and edits slides and text, and can insert saved visualizations from the Products page. On the Products page itself it can only list products, since no results package is open there.
 
 ### Knowledge and documentation
 
@@ -36,7 +36,7 @@ Your conversation with the AI and the questions you ask and answers you receive 
 
 ### What's shared
 
-The underlying data (same HMIS data), saved visualizations in the project library, slide decks and reports you create and save, and project settings and module results are shared with the team. Everyone can see saved content.
+The underlying data, the results packages, and every visualization, slide deck and report saved on the Products page are shared with the team, subject to each product's access settings. Everyone who can open a product sees what the AI changed in it.
 
 ## Where the AI provides greatest value
 
@@ -119,7 +119,7 @@ The FASTR platform includes an AI assistant that provides on-demand support for 
 
 **Visualizations** — Explore and understand your data
 
-- Access all saved visualizations within the project
+- Work on the visualization you have open, or insert any saved one into a deck
 - Review underlying data for any chart or figure
 - Modify visualization parameters including chart type, filters, time periods, and disaggregation levels
 - Receive explanations of what each visualization represents
@@ -206,13 +206,13 @@ PRESENTER NOTES:
 | Content | Saved? | Notes |
 |---------|--------|-------|
 | Your AI conversation | Temporary | AI conversations are saved locally in the browser and are visible only to the person using that browser. Refreshing the page or closing the tab will not delete the conversation. The chat history will only disappear if the browser cache is cleared or a different browser or device is used. |
-| Slide decks/reports you create | Permanent | Saved to project, visible to team |
-| Saved visualizations | Permanent | Remain in project library |
+| Slide decks/reports you create | Permanent | On the Products page, visible to anyone with access |
+| Saved visualizations | Permanent | Remain on the Products page |
 | Downloaded exports | Permanent | Saved to your computer |
 <!-- /SLIDE -->
 
 <!-- SLIDE:mai_8a -->
-## Private vs shared on team projects
+## Private vs shared on the team's Products page
 
 <div class="columns">
 <div>
@@ -229,12 +229,11 @@ Other team members cannot see what you're exploring.
 
 **Shared with team:**
 
-- The underlying data (same HMIS data)
-- Saved visualizations in project library
-- Slide decks/reports you create and save
-- Project settings and module results
+- The underlying data and the results packages
+- Visualizations, slide decks and reports saved on the Products page
+- What the AI changed in a product, the moment it changed it
 
-Everyone can see saved content.
+Everyone with access to a product sees it.
 
 </div>
 </div>
@@ -246,7 +245,7 @@ Everyone can see saved content.
 | Who | Action | Result |
 |-----|--------|--------|
 | **Dr. Amina** (Director) | Asks AI about coverage, explores privately, creates slide deck | Deck now visible to all |
-| **Mohamed** (Data Manager) | Asks AI about reporting gaps, saves a chart | Chart in library for everyone |
+| **Mohamed** (Data Manager) | Asks AI about reporting gaps, saves a chart | Chart on the Products page for the team |
 | **Fatima** (Program Officer) | Opens Amina's slides, uses Mohamed's chart, asks AI to explain | Gets private explanation |
 
 **What each person sees:**

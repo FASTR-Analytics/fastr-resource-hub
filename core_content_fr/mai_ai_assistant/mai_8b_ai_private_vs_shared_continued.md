@@ -9,7 +9,7 @@ paginate: true
 | Qui | Action | Résultat |
 |-----|--------|----------|
 | **Dr Amina** (directrice) | Demande à l'IA la couverture, explore en privé, crée une présentation | Présentation visible par tous |
-| **Mohamed** (gestionnaire données) | Demande les lacunes de rapportage, sauvegarde un graphique | Graphique dans la bibliothèque pour tous |
+| **Mohamed** (gestionnaire données) | Demande les lacunes de rapportage, sauvegarde un graphique | Graphique sur la page Produits pour l'équipe |
 | **Fatima** (chargée de programme) | Ouvre les diapos d'Amina, utilise le graphique de Mohamed, demande à l'IA d'expliquer | Reçoit une explication privée |
 
 **Ce que chacun voit :**
