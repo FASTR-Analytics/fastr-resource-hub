@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500">
+<rect width="960" height="500" fill="#ffffff"/>
+<text x="30" y="40" font-family="Inter, -apple-system, sans-serif" font-size="17" font-weight="700" fill="#6B7280">Circuito manual</text>
+<text x="30" y="58" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#666">Todos os meses, todos os relatórios, à mão</text>
+<rect x="30.0" y="70" width="205.5" height="150" rx="10" fill="#F3F4F6" stroke="#6B7280" stroke-width="1.4"/>
+<circle cx="50.0" cy="92" r="12" fill="#6B7280"/>
+<text x="50.0" y="96.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">1</text>
+<text x="42.0" y="120" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Iniciar sessão no DHIS2</text>
+<text x="42.0" y="139" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Encontrar os conjuntos de</text>
+<text x="42.0" y="152.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">dados e indicadores certos</text>
+<polyline points="239.5,139.0 255.5,145.0 239.5,151.0" fill="none" stroke="#6B7280" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="261.5" y="70" width="205.5" height="150" rx="10" fill="#F3F4F6" stroke="#6B7280" stroke-width="1.4"/>
+<circle cx="281.5" cy="92" r="12" fill="#6B7280"/>
+<text x="281.5" y="96.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">2</text>
+<text x="273.5" y="120" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Transferir os últimos</text>
+<text x="273.5" y="135" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">meses</text>
+<text x="273.5" y="154" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Uma exportação por indicador e</text>
+<text x="273.5" y="167.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">nível, em Excel ou CSV</text>
+<polyline points="471.0,139.0 487.0,145.0 471.0,151.0" fill="none" stroke="#6B7280" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="493.0" y="70" width="205.5" height="150" rx="10" fill="#F3F4F6" stroke="#6B7280" stroke-width="1.4"/>
+<circle cx="513.0" cy="92" r="12" fill="#6B7280"/>
+<text x="513.0" y="96.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">3</text>
+<text x="505.0" y="120" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Excel ou outra</text>
+<text x="505.0" y="135" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">ferramenta de análise</text>
+<text x="505.0" y="154" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Limpar, construir as tabelas e</text>
+<text x="505.0" y="167.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">os gráficos à mão</text>
+<polyline points="702.5,139.0 718.5,145.0 702.5,151.0" fill="none" stroke="#6B7280" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="724.5" y="70" width="205.5" height="150" rx="10" fill="#F3F4F6" stroke="#6B7280" stroke-width="1.4"/>
+<circle cx="744.5" cy="92" r="12" fill="#6B7280"/>
+<text x="744.5" y="96.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">4</text>
+<text x="736.5" y="120" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Word ou outra ferramenta</text>
+<text x="736.5" y="135" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">de texto</text>
+<text x="736.5" y="154" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Colar tabelas e gráficos,</text>
+<text x="736.5" y="167.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">escrever o texto, refazer a</text>
+<text x="736.5" y="181.0" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">paginação</text>
+<text x="30" y="240" font-family="Inter, -apple-system, sans-serif" font-size="11" font-style="italic" fill="#6B7280">Cada passo repete-se no mês seguinte. Os erros entram a cada copiar e colar.</text>
+<line x1="30" y1="262" x2="930" y2="262" stroke="#E4E7E5" stroke-width="1"/>
+<text x="30" y="280" font-family="Inter, -apple-system, sans-serif" font-size="17" font-weight="700" fill="#0A544F">Com a plataforma FASTR</text>
+<text x="30" y="298" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#666">Depois de configurada, três passos por mês</text>
+<rect x="30.0" y="310" width="282.6666666666667" height="150" rx="10" fill="#E8F4F3" stroke="#0A544F" stroke-width="1.4"/>
+<circle cx="50.0" cy="332" r="12" fill="#1FA29C"/>
+<text x="50.0" y="336.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">1</text>
+<text x="42.0" y="360" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Dados, depois Importar</text>
+<text x="42.0" y="379" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Obter os últimos meses do</text>
+<text x="42.0" y="392.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">DHIS2 pela API</text>
+<polyline points="316.6666666666667,379.0 332.6666666666667,385.0 316.6666666666667,391.0" fill="none" stroke="#0A544F" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="338.6666666666667" y="310" width="282.6666666666667" height="150" rx="10" fill="#E8F4F3" stroke="#0A544F" stroke-width="1.4"/>
+<circle cx="358.6666666666667" cy="332" r="12" fill="#1FA29C"/>
+<text x="358.6666666666667" y="336.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">2</text>
+<text x="350.6666666666667" y="360" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Resultados, depois Gerar</text>
+<text x="350.6666666666667" y="375" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0A544F">um pacote</text>
+<text x="350.6666666666667" y="394" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Qualidade, ajustes,</text>
+<text x="350.6666666666667" y="407.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">perturbações e cobertura</text>
+<text x="350.6666666666667" y="421.0" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">calculados de uma vez</text>
+<polyline points="625.3333333333334,379.0 641.3333333333334,385.0 625.3333333333334,391.0" fill="none" stroke="#0A544F" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="647.3333333333334" y="310" width="282.6666666666667" height="150" rx="10" fill="#E8F4F3" stroke="#0A544F" stroke-width="1.4"/>
+<circle cx="667.3333333333334" cy="332" r="12" fill="#1FA29C"/>
+<text x="667.3333333333334" y="336.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">3</text>
+<text x="659.3333333333334" y="360" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Produtos, depois</text>
+<text x="659.3333333333334" y="375" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0A544F">relatório ou</text>
+<text x="659.3333333333334" y="390" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0A544F">apresentação</text>
+<text x="659.3333333333334" y="409" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Atualizar o relatório do mês</text>
+<text x="659.3333333333334" y="422.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">passado com o assistente de</text>
+<text x="659.3333333333334" y="436.0" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">IA, ou criar um novo; os</text>
+<text x="659.3333333333334" y="449.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">gráficos continuam ligados aos</text>
+<text x="659.3333333333334" y="463.0" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">dados</text>
+<text x="30" y="480" font-family="Inter, -apple-system, sans-serif" font-size="11" font-style="italic" fill="#0A544F">O pacote é partilhado por toda a equipa; cada gráfico e relatório lê-o.</text>
+</svg>

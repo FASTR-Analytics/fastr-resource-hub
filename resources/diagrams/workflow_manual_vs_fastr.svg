@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500">
+<rect width="960" height="500" fill="#ffffff"/>
+<text x="30" y="40" font-family="Inter, -apple-system, sans-serif" font-size="17" font-weight="700" fill="#6B7280">Manual workflow</text>
+<text x="30" y="58" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#666">Every month, every report, by hand</text>
+<rect x="30.0" y="70" width="205.5" height="150" rx="10" fill="#F3F4F6" stroke="#6B7280" stroke-width="1.4"/>
+<circle cx="50.0" cy="92" r="12" fill="#6B7280"/>
+<text x="50.0" y="96.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">1</text>
+<text x="42.0" y="120" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Log in to DHIS2</text>
+<text x="42.0" y="139" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Find the right data sets and</text>
+<text x="42.0" y="152.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">indicators</text>
+<polyline points="239.5,139.0 255.5,145.0 239.5,151.0" fill="none" stroke="#6B7280" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="261.5" y="70" width="205.5" height="150" rx="10" fill="#F3F4F6" stroke="#6B7280" stroke-width="1.4"/>
+<circle cx="281.5" cy="92" r="12" fill="#6B7280"/>
+<text x="281.5" y="96.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">2</text>
+<text x="273.5" y="120" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Download the last months</text>
+<text x="273.5" y="139" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">One export per indicator and</text>
+<text x="273.5" y="152.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">level, as Excel or CSV</text>
+<polyline points="471.0,139.0 487.0,145.0 471.0,151.0" fill="none" stroke="#6B7280" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="493.0" y="70" width="205.5" height="150" rx="10" fill="#F3F4F6" stroke="#6B7280" stroke-width="1.4"/>
+<circle cx="513.0" cy="92" r="12" fill="#6B7280"/>
+<text x="513.0" y="96.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">3</text>
+<text x="505.0" y="120" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Excel or another</text>
+<text x="505.0" y="135" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">analysis tool</text>
+<text x="505.0" y="154" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Clean, build the tables and</text>
+<text x="505.0" y="167.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">charts by hand</text>
+<polyline points="702.5,139.0 718.5,145.0 702.5,151.0" fill="none" stroke="#6B7280" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="724.5" y="70" width="205.5" height="150" rx="10" fill="#F3F4F6" stroke="#6B7280" stroke-width="1.4"/>
+<circle cx="744.5" cy="92" r="12" fill="#6B7280"/>
+<text x="744.5" y="96.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">4</text>
+<text x="736.5" y="120" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">Word or another text</text>
+<text x="736.5" y="135" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1F2937">tool</text>
+<text x="736.5" y="154" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Paste the tables and charts,</text>
+<text x="736.5" y="167.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">write the text, fix the layout</text>
+<text x="30" y="240" font-family="Inter, -apple-system, sans-serif" font-size="11" font-style="italic" fill="#6B7280">Each step repeats next month. Errors creep in at every copy and paste.</text>
+<line x1="30" y1="262" x2="930" y2="262" stroke="#E4E7E5" stroke-width="1"/>
+<text x="30" y="280" font-family="Inter, -apple-system, sans-serif" font-size="17" font-weight="700" fill="#0A544F">With the FASTR platform</text>
+<text x="30" y="298" font-family="Inter, -apple-system, sans-serif" font-size="11" fill="#666">Once set up, three steps a month</text>
+<rect x="30.0" y="310" width="282.6666666666667" height="150" rx="10" fill="#E8F4F3" stroke="#0A544F" stroke-width="1.4"/>
+<circle cx="50.0" cy="332" r="12" fill="#1FA29C"/>
+<text x="50.0" y="336.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">1</text>
+<text x="42.0" y="360" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Data, then Import</text>
+<text x="42.0" y="379" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Pull the latest months from</text>
+<text x="42.0" y="392.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">DHIS2 through the API</text>
+<polyline points="316.6666666666667,379.0 332.6666666666667,385.0 316.6666666666667,391.0" fill="none" stroke="#0A544F" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="338.6666666666667" y="310" width="282.6666666666667" height="150" rx="10" fill="#E8F4F3" stroke="#0A544F" stroke-width="1.4"/>
+<circle cx="358.6666666666667" cy="332" r="12" fill="#1FA29C"/>
+<text x="358.6666666666667" y="336.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">2</text>
+<text x="350.6666666666667" y="360" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Results, then Generate a</text>
+<text x="350.6666666666667" y="375" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0A544F">package</text>
+<text x="350.6666666666667" y="394" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Quality checks, adjustments,</text>
+<text x="350.6666666666667" y="407.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">disruptions and coverage</text>
+<text x="350.6666666666667" y="421.0" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">computed in one go</text>
+<polyline points="625.3333333333334,379.0 641.3333333333334,385.0 625.3333333333334,391.0" fill="none" stroke="#0A544F" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="647.3333333333334" y="310" width="282.6666666666667" height="150" rx="10" fill="#E8F4F3" stroke="#0A544F" stroke-width="1.4"/>
+<circle cx="667.3333333333334" cy="332" r="12" fill="#1FA29C"/>
+<text x="667.3333333333334" y="336.5" text-anchor="middle" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#ffffff">3</text>
+<text x="659.3333333333334" y="360" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0A544F">Products, then report or</text>
+<text x="659.3333333333334" y="375" font-family="Inter, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0A544F">slide deck</text>
+<text x="659.3333333333334" y="394" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">Update last month's report</text>
+<text x="659.3333333333334" y="407.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">with the AI assistant, or</text>
+<text x="659.3333333333334" y="421.0" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">create a new one; charts stay</text>
+<text x="659.3333333333334" y="434.5" font-family="Inter, -apple-system, sans-serif" font-size="10.5" fill="#444">linked to the data</text>
+<text x="30" y="480" font-family="Inter, -apple-system, sans-serif" font-size="11" font-style="italic" fill="#0A544F">The package is shared by the whole team; every chart and report reads it.</text>
+</svg>
