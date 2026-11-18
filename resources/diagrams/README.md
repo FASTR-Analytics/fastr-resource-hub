@@ -111,7 +111,7 @@ referenced from related handouts and the methodology docs.
 | File | Shows | Primary use |
 |---|---|---|
 | `platform_capabilities.svg` | Platform feature map | slide `m3_1b_overview_of_platform_continued` |
-| `workflow_manual_vs_fastr.svg` | Monthly reporting by hand (DHIS2 export, Excel, Word) vs with FASTR (Data → Import, Results → package, Products → report); built by `tools/build_workflow_comparison_diagram.py`, FR/PT variants in `diagrams_fr/`, `diagrams_pt/` | one-off decks (Tchad Nov 2026) |
+| `workflow_manual_vs_fastr.svg` | Monthly reporting by hand (DHIS2 export, Excel, Word) vs with FASTR (Data → Import, Results → package, Products → report); built by `tools/build_workflow_comparison_diagram.py`, FR/PT variants in `diagrams_fr/`, `diagrams_pt/` | methodology ch. 3 (Data flow), slide `m3_1c_overview_of_platform_continued` |
 | `products_folders_scopes.svg` | Products in folders, results packages and scopes within a country instance (platform 2.x; built by `tools/build_platform_structure_diagram.py`, FR/PT variants in `diagrams_fr/`, `diagrams_pt/`) | slide `m3_2c_accessing_platform_continued`, methodology ch. 3 |
 | `projects_within_instance.svg` | Projects nested within a country instance (platform 1.x, retired from ch. 3) | `decks/*/plaidoyer_plateforme_fastr.md` only |
 | `platform_roadmap_2026.svg` | 2026 roadmap | slide `m3_5_roadmap_2026` |

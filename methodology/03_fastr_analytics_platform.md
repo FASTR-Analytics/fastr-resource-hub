@@ -69,6 +69,8 @@ Users work on the **Products** page: one list for the whole instance, organized 
 
 The platform follows a structured data flow: **Data import → Results package → Products**. An administrator imports facility data at the instance level and generates a results package from it. Users then build products that read the package: a visualization shows one metric as a chart, map or table; slide decks and reports assemble visualizations with text. A scope on each product narrows what it shows. The Explore page sits beside this flow for a quick look at any computed result.
 
+![Monthly reporting by hand and with FASTR](resources/diagrams/workflow_manual_vs_fastr.svg)
+
 
 ## Technical requirements
 
@@ -231,6 +233,21 @@ The platform provides a user-friendly interface for running analyses and offers 
 
 </div>
 </div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_1c -->
+## From data to report: by hand and with FASTR
+
+![Monthly reporting by hand and with FASTR w:700](../resources/diagrams/workflow_manual_vs_fastr.svg)
+
+By hand, every monthly report is rebuilt from a DHIS2 export. With FASTR, a report is **linked to a results package**: it picks one when created, and a new month means switching it to the new package. Every chart refreshes; the AI assistant rewrites the text.
+
+<!--
+PRESENTER NOTES:
+- The four grey steps are what most teams do today; ask the room how long one report takes.
+- The three green steps are the platform flow: Data → Import, Results → Generate a results package, Products → report. Only the first two need an administrator.
+- Charts in a FASTR report stay linked to the package, so updating the report is a package change, not a rebuild.
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2a -->

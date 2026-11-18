@@ -72,6 +72,8 @@ Os utilizadores trabalham na página **Produtos**: uma única lista para toda a 
 
 A plataforma segue um fluxo de dados estruturado: **Importação de dados → Pacote de resultados → Produtos**. Um administrador importa os dados das unidades ao nível da instância e gera a partir deles um pacote de resultados. Os utilizadores constroem depois produtos que leem o pacote: uma visualização mostra uma métrica como gráfico, mapa ou tabela; apresentações e relatórios juntam visualizações e texto. Um âmbito em cada produto restringe o que ele mostra. A página Explorar fica ao lado deste fluxo, para uma olhada rápida a qualquer resultado calculado.
 
+![O relatório mensal à mão e com o FASTR](resources/diagrams_pt/workflow_manual_vs_fastr.svg)
+
 
 ## Requisitos técnicos
 
@@ -234,6 +236,21 @@ A plataforma oferece uma interface intuitiva para a realização de análises e 
 
 </div>
 </div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_1c -->
+## Dos dados ao relatório: à mão e com o FASTR
+
+![O relatório mensal à mão e com o FASTR w:700](../resources/diagrams_pt/workflow_manual_vs_fastr.svg)
+
+À mão, cada relatório mensal é reconstruído a partir de uma exportação do DHIS2. Com o FASTR, um relatório está **ligado a um pacote de resultados**: escolhe um ao ser criado, e um mês novo é passá-lo para o novo pacote. Todos os gráficos se atualizam; o assistente de IA reescreve o texto.
+
+<!--
+PRESENTER NOTES:
+- Os quatro passos cinzentos são o que a maioria das equipas faz hoje; pergunte à sala quanto tempo demora um relatório.
+- Os três passos verdes são o circuito da plataforma: Dados → Importar, Resultados → Gerar um pacote de resultados, Produtos → relatório. Só os dois primeiros precisam de um administrador.
+- Os gráficos de um relatório FASTR continuam ligados ao pacote: atualizar o relatório é mudar de pacote, não reconstruir tudo.
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2a -->

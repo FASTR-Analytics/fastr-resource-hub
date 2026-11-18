@@ -72,6 +72,8 @@ Les utilisateurs travaillent sur la page **Produits** : une seule liste pour tou
 
 La plateforme suit un flux de données structuré : **Importation des données → Paquet de résultats → Produits**. Un administrateur importe les données des établissements au niveau de l'instance et en génère un paquet de résultats. Les utilisateurs construisent ensuite des produits qui lisent le paquet : une visualisation montre une métrique sous forme de graphique, de carte ou de tableau ; les présentations et les rapports assemblent des visualisations et du texte. Une portée sur chaque produit restreint ce qu'il montre. La page Explorer se tient à côté de ce flux, pour un coup d'œil rapide à n'importe quel résultat calculé.
 
+![Le rapport mensuel à la main et avec FASTR](resources/diagrams_fr/workflow_manual_vs_fastr.svg)
+
 
 ## Configuration technique requise
 
@@ -234,6 +236,21 @@ La plateforme offre une interface conviviale pour effectuer des analyses et prop
 
 </div>
 </div>
+<!-- /SLIDE -->
+
+<!-- SLIDE:m3_1c -->
+## Des données au rapport : à la main et avec FASTR
+
+![Le rapport mensuel à la main et avec FASTR w:700](../resources/diagrams_fr/workflow_manual_vs_fastr.svg)
+
+À la main, chaque rapport mensuel est reconstruit à partir d'un export DHIS2. Avec FASTR, un rapport est **lié à un paquet de résultats** : il en choisit un à sa création, et un nouveau mois revient à le faire passer sur le nouveau paquet. Tous les graphiques se mettent à jour ; l'assistant IA réécrit le texte.
+
+<!--
+PRESENTER NOTES:
+- Les quatre étapes grises sont ce que la plupart des équipes font aujourd'hui ; demandez à la salle combien de temps prend un rapport.
+- Les trois étapes vertes sont le circuit de la plateforme : Données → Importer, Résultats → Générer un paquet de résultats, Produits → rapport. Seules les deux premières demandent un administrateur.
+- Les graphiques d'un rapport FASTR restent liés au paquet : mettre à jour le rapport, c'est changer de paquet, pas tout reconstruire.
+-->
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2a -->

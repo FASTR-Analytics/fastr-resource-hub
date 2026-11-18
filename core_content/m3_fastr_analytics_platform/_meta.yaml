@@ -7,6 +7,10 @@ slides:
   order: 1.02
   variant: full
   title: Platform capabilities
+- file: m3_1c_overview_of_platform_continued.md
+  order: 1.03
+  variant: full
+  title: 'From data to report: by hand and with FASTR'
 - file: m3_2a_accessing_platform_continued.md
   order: 2.01
   variant: full
