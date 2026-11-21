@@ -98,7 +98,7 @@ def main():
 
     para(doc, "NOTE À L'ATTENTION DU MINISTÈRE DE LA SANTÉ DU BÉNIN", size=9, bold=True, color=GREEN, space_after=2)
     para(doc, "La plateforme d'analyse FASTR : ce qu'elle fait et pourquoi elle est utile au ministère", size=16, bold=True, color=GREEN, space_after=4)
-    para(doc, "Global Financing Facility (GFF), Banque mondiale · Novembre 2026", size=9.5, color=GREY, space_after=8)
+    para(doc, "Global Financing Facility (GFF) · Novembre 2026", size=9.5, color=GREY, space_after=8)
 
     heading(doc, "Ce que c'est")
     rich(doc, [("La plateforme d'analyse FASTR est un site web sécurisé, propre au Bénin, qui prend les données que les formations sanitaires déclarent déjà chaque mois dans le DHIS2, les analyse automatiquement, et permet à l'équipe du ministère d'en faire des graphiques, des présentations et des rapports. Il n'y a rien à installer : on s'y connecte avec un navigateur, en français. FASTR (", False), ("Frequent Assessments and System Tools for Resilience", True), (") est l'approche du GFF pour l'analyse à cycle rapide ; la plateforme en est l'outil.", False)], space_after=8)
