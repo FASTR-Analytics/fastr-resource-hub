@@ -65,9 +65,11 @@ def shade(cell, hex_fill):
 
 def spec_table(doc, rows):
     t = doc.add_table(rows=len(rows), cols=2); t.style = "Table Grid"; t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    t.autofit = False
+    t.columns[0].width = Cm(4.2); t.columns[1].width = Cm(13.0)
     for i, (k, v) in enumerate(rows):
         c0, c1 = t.cell(i, 0), t.cell(i, 1)
-        c0.width, c1.width = Cm(4.6), Cm(12.6)
+        c0.width, c1.width = Cm(4.2), Cm(13.0)
         for c in (c0, c1):
             c.paragraphs[0].paragraph_format.space_after = Pt(0)
             c.paragraphs[0].paragraph_format.line_spacing = 1.05
