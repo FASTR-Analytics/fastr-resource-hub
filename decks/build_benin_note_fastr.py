@@ -31,7 +31,7 @@ def shade(cell, hex_fill):
     tcPr.append(shd)
 
 
-def run(p, text, bold=False, size=10, color=INK, italic=False):
+def run(p, text, bold=False, size=9.5, color=INK, italic=False):
     r = p.add_run(text); r.bold = bold; r.italic = italic
     r.font.size = Pt(size); r.font.color.rgb = color; r.font.name = "Calibri"
     return r
@@ -85,7 +85,7 @@ def main():
     sec = doc.sections[0]
     sec.page_height, sec.page_width = Cm(29.7), Cm(21.0)
     sec.left_margin = sec.right_margin = Cm(2.0); sec.top_margin = Cm(1.3); sec.bottom_margin = Cm(1.3)
-    st = doc.styles["Normal"]; st.font.name = "Calibri"; st.font.size = Pt(10)
+    st = doc.styles["Normal"]; st.font.name = "Calibri"; st.font.size = Pt(9.5)
     st.element.rPr.rFonts.set(qn("w:eastAsia"), "Calibri")
 
     # header line: logos
@@ -96,77 +96,66 @@ def main():
     fp = sec.footer.paragraphs[0]; fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
     run(fp, "Note technique · Plateforme d'analyse FASTR · Novembre 2026 · fastr-analytics.org/fr", size=8, color=GREY)
 
-    para(doc, "NOTE TECHNIQUE", size=9, bold=True, color=GREEN, space_after=2)
-    para(doc, "La plateforme d'analyse FASTR : ce qui la distingue des outils en place", size=17, bold=True, color=GREEN, space_after=4)
-    para(doc, "À l'attention du ministère de la Santé du Bénin · Global Financing Facility (GFF), Banque mondiale · Novembre 2026", size=9.5, color=GREY, space_after=10)
+    para(doc, "NOTE À L'ATTENTION DU MINISTÈRE DE LA SANTÉ DU BÉNIN", size=9, bold=True, color=GREEN, space_after=2)
+    para(doc, "La plateforme d'analyse FASTR : ce qu'elle fait et pourquoi elle est utile au ministère", size=16, bold=True, color=GREEN, space_after=4)
+    para(doc, "Global Financing Facility (GFF), Banque mondiale · Novembre 2026", size=9.5, color=GREY, space_after=8)
 
-    heading(doc, "En une phrase")
-    rich(doc, [("FASTR (", False), ("Frequent Assessments and System Tools for Resilience", True),
-               (") est l'approche du GFF pour l'analyse à cycle rapide des données de santé. Sa plateforme se connecte au DHIS2, vérifie et corrige la qualité des données, fait les analyses, et produit des rapports et des présentations qui se mettent à jour chaque mois. Elle ne remplace ni le DHIS2 ni les enquêtes : elle fait, à la place de l'équipe, le travail qui se situe entre les données brutes et le rapport.", False)], space_after=8)
+    heading(doc, "Ce que c'est")
+    rich(doc, [("La plateforme d'analyse FASTR est un site web sécurisé, propre au Bénin, qui prend les données que les formations sanitaires déclarent déjà chaque mois dans le DHIS2, les analyse automatiquement, et permet à l'équipe du ministère d'en faire des graphiques, des présentations et des rapports. Il n'y a rien à installer : on s'y connecte avec un navigateur, en français. FASTR (", False), ("Frequent Assessments and System Tools for Resilience", True), (") est l'approche du GFF pour l'analyse à cycle rapide ; la plateforme en est l'outil.", False)], space_after=8)
 
-    heading(doc, "Ce qui la distingue, point par point")
-
-    point(doc, 1, "Connectée au DHIS2 : plus rien à télécharger à la main", [
-        "La plateforme est reliée directement au DHIS2 du pays. L'importation des derniers mois se fait en un clic ou se programme, et se répète seule.",
-        "Fini les exports indicateur par indicateur, les fichiers Excel qui circulent et les erreurs de copier-coller.",
+    heading(doc, "Comment elle fonctionne, en quatre étapes")
+    point(doc, 1, "Données : la plateforme se connecte au DHIS2 et récupère les derniers mois", [
+        "Un administrateur du ministère relie une fois la plateforme au DHIS2 du Bénin et choisit les indicateurs à suivre (CPN1, CPN4, accouchements, Penta3, etc.). Ensuite, chaque mois, l'importation des nouvelles données se lance en un clic ou se programme. Plus personne n'exporte de fichiers ni ne ressaisit de chiffres.",
+        "Au même endroit, on charge aussi la dernière enquête nationale (EDS, MICS), les enquêtes auprès des formations sanitaires et les données de population : toutes les sources du pays, dans un seul espace.",
     ])
-    point(doc, 2, "Toutes les sources de données au même endroit", [
-        "Le DHIS2, les enquêtes auprès des formations sanitaires (HFA), les enquêtes ménages et les données de population vivent dans le même espace, pour tout le pays.",
-        "Les analyses les combinent : par exemple, les données de routine et la dernière enquête pour estimer la couverture, ou les volumes de services et l'enquête auprès des formations pour expliquer une baisse.",
+    point(doc, 2, "Analyse : la plateforme calcule tout, pour tous les indicateurs et toutes les zones", [
+        "Après chaque importation, l'administrateur lance une génération de résultats. La plateforme vérifie la qualité des données (rapports manquants, valeurs aberrantes, incohérences) et corrige les séries, puis calcule les tendances des services, repère les mois où un service s'écarte de ce qu'il aurait dû être, et estime la couverture. Tout cela pour le pays, chaque département et chaque sous-préfecture, en une opération.",
+        "Personne n'écrit de formule ni de code. Les résultats sont les mêmes pour toute l'équipe.",
     ])
-    point(doc, 3, "La qualité des données est vérifiée et corrigée automatiquement", [
-        "Avant toute analyse, la plateforme repère les rapports manquants, les valeurs aberrantes et les incohérences, puis corrige les séries. L'original reste disponible.",
-        "La qualité des données cesse d'être une raison de ne pas s'en servir : elle devient un résultat que l'on suit et que l'on améliore.",
+    point(doc, 3, "Visualisation : chacun lit les résultats et construit ses graphiques", [
+        "Une page Explorer montre tous les résultats en tableau, en courbes ou en carte, avec des filtres par zone, indicateur et période. Pour aller plus loin, l'utilisateur construit en quelques clics ses propres graphiques, qu'il enregistre dans son dossier.",
     ])
-    point(doc, 4, "Une analyse des perturbations de services que l'on ne trouve nulle part ailleurs", [
-        "Pour chaque service et chaque zone, la plateforme calcule ce que le volume aurait dû être, compte tenu de l'historique de chaque établissement, de la tendance et de la saison, et signale les mois où le volume réel s'en écarte : en rouge quand les services ont décroché, en vert quand ils ont dépassé l'attendu.",
-        "Elle distingue une baisse due à des établissements qui n'ont pas rapporté d'une baisse réelle des services rendus. Un tableau de bord montre le volume déclaré ; FASTR dit s'il est anormal, depuis quand, de combien et où.",
-    ])
-    point(doc, 5, "Une estimation de la couverture alignée sur Countdown, sans dépendre des projections de population", [
-        "La couverture habituelle divise les services rendus par une population cible projetée à partir du dernier recensement. Quand la projection est fausse, ce qui est fréquent entre deux recensements, la couverture l'est aussi, parfois au-delà de 100 %.",
-        "FASTR estime les dénominateurs à partir des services eux-mêmes (CPN1, accouchements, naissances vivantes, Penta1), calés sur la dernière enquête nationale, selon la méthode de Countdown to 2030. La couverture est ainsi suivie chaque mois entre deux enquêtes, pour le pays et pour chaque région.",
-    ])
-    point(doc, 6, "Les autres analyses sont faites pour vous, de la même façon dans une trentaine de pays", [
-        "Tendances des services, variations trimestrielles et annuelles, indicateurs calculés propres au pays : les calculs sont intégrés, sans code à écrire ni feuille de calcul à entretenir.",
-        "Les méthodes sont les mêmes dans tous les pays partenaires et documentées publiquement. Les résultats se comparent d'un pays à l'autre et d'un trimestre à l'autre.",
-    ])
-    point(doc, 7, "Un travail beaucoup plus rapide : le rapport se met à jour, il ne se refait pas", [
-        "Les graphiques d'un rapport ou d'une présentation restent reliés aux données. Quand un nouveau mois arrive, les figures se mettent à jour et le texte s'adapte.",
-        "Ce qui prenait des jours chaque mois (exporter, nettoyer, refaire les graphiques, remettre en page) prend quelques heures, consacrées à l'interprétation plutôt qu'à la manipulation.",
-    ])
-    point(doc, 8, "Conçue pour produire de bons rapports et de bonnes présentations", [
-        "Des modèles de présentation et de rapport prêts à l'emploi, aux couleurs et au logo du ministère, avec les graphiques de la plateforme intégrés.",
-        "Un rapport de revue mensuelle, un bulletin trimestriel ou une note de plaidoyer se produisent dans la plateforme et se téléchargent ou se partagent directement.",
-    ])
-    point(doc, 9, "Un assistant IA intégré, qui lit vos données", [
-        "L'assistant répond à des questions posées en langage courant, construit des graphiques, propose une interprétation et rédige un premier jet de rapport.",
-        "Il travaille uniquement à partir des résultats calculés dans la plateforme : il n'invente aucun chiffre. L'équipe relit et garde la main.",
-    ])
-    point(doc, 10, "Un espace de travail collaboratif", [
-        "Toute l'équipe travaille dans le même espace, organisé en dossiers, comme un disque partagé. Plusieurs personnes peuvent travailler sur la même présentation ; tout s'enregistre en continu, avec un historique des versions.",
-        "Un graphique construit une fois sert à tout le monde : dans un rapport, dans une présentation, dans une revue.",
-    ])
-    point(doc, 11, "Une gestion des utilisateurs : chacun voit ce qu'il doit voir", [
-        "Les comptes sont approuvés par l'administrateur du ministère. L'accès se règle par produit et par dossier : un rapport peut être réservé à une direction, ou ouvert à tous.",
-        "Un utilisateur peut être limité à une région ou à une période : il ne voit que les données de son périmètre, partout dans la plateforme.",
-    ])
-    point(doc, 12, "Les données restent celles du pays", [
-        "Une installation séparée par pays. Uniquement des totaux agrégés par établissement et par mois, les mêmes que dans le DHIS2 ; aucune donnée nominative.",
-        "Logiciel libre, sans licence ni frais par utilisateur. Interface en français. Rien à installer : un navigateur suffit. Les données et les résultats sont exportables à tout moment.",
+    point(doc, 4, "Rapports et présentations : produits dans la plateforme, mis à jour chaque mois", [
+        "Les rapports et les présentations se composent directement dans la plateforme, aux couleurs du ministère, avec les graphiques et le texte d'interprétation. Un assistant IA intégré aide à décrire un graphique ou à rédiger un premier jet, à partir des seuls résultats calculés.",
+        "Les graphiques restent reliés aux données : quand les données du mois suivant arrivent, le rapport se met à jour au lieu d'être refait. On le présente depuis la plateforme, on le télécharge ou on le partage.",
     ])
 
-    heading(doc, "Ce que FASTR ne fait pas")
-    for b in ["Elle ne collecte pas de données et ne remplace pas le DHIS2 : elle s'y connecte.",
-              "Elle ne remplace pas les enquêtes : elle s'en sert comme référence et comble les années entre elles.",
-              "Elle ne décide pas : elle dit où regarder. Le pourquoi et l'action restent au ministère."]:
+    heading(doc, "Ce qui la rend utile au ministère, au-delà des outils en place")
+    point(doc, 1, "Savoir chaque mois où les services décrochent, et si c'est réel", [
+        "Pour chaque service et chaque zone, la plateforme calcule ce que le volume aurait dû être, à partir de l'historique de chaque formation sanitaire, de la tendance et de la saison, et signale les mois où le volume réel s'en écarte : rouge quand les services ont décroché, vert quand ils ont dépassé.",
+        "Elle distingue une baisse due à des formations qui n'ont pas rapporté d'une baisse réelle des services rendus. Un tableau de bord montre le chiffre déclaré ; la plateforme dit s'il est anormal, depuis quand, de combien et où. Aucun autre outil en place ne fait cela.",
+    ])
+    point(doc, 2, "Suivre la couverture entre deux enquêtes, sans dépendre des projections de population", [
+        "La couverture habituelle divise les services par une population projetée depuis le dernier recensement ; quand la projection est fausse, la couverture l'est aussi, parfois au-delà de 100 %. La plateforme estime les populations cibles à partir des services eux-mêmes (CPN1, accouchements, naissances vivantes, Penta1), calés sur la dernière enquête, selon la méthode de Countdown to 2030.",
+    ])
+    point(doc, 3, "Des données dont la qualité est connue et corrigée", [
+        "La qualité cesse d'être un argument pour ne pas se servir des données : elle devient un résultat suivi, par zone et par indicateur, que le ministère peut faire progresser.",
+    ])
+    point(doc, 4, "La revue mensuelle en quelques heures, pas en quelques jours", [
+        "Plus d'export, plus de copier-coller, plus de graphiques à refaire : le temps gagné va à l'interprétation et à la décision.",
+    ])
+    point(doc, 5, "Un travail d'équipe, chacun avec ses accès", [
+        "Un espace partagé par tout le pays, organisé en dossiers, avec un historique des versions. Les comptes sont approuvés par le ministère ; l'accès se règle par dossier et par document, et un utilisateur peut être limité à son département ou à son programme : chacun voit ce qu'il doit voir.",
+    ])
+
+    heading(doc, "Concrètement, pour qui ?")
+    for b in ["Une direction centrale : une revue trimestrielle des services SRMNEA-N prête en quelques heures, avec les zones qui décrochent identifiées et la couverture mise à jour.",
+              "Un programme (vaccination, santé maternelle) : le suivi mensuel de ses indicateurs, l'alerte quand un département s'écarte de l'attendu, et un bulletin qui se met à jour.",
+              "Une direction départementale : ses propres données, son propre dossier, les mêmes analyses que le niveau central.",
+              "Le suivi d'un choc : plusieurs pays s'en servent pour mesurer, mois par mois, l'effet des changements de financement sur les services, sans attendre une enquête."]:
         q = doc.add_paragraph(style="List Bullet"); q.paragraph_format.space_after = Pt(2); run(q, b)
+
+    heading(doc, "Pourquoi lui faire confiance")
+    for b in ["Les méthodes sont documentées publiquement (fastr-analytics.org/fr) et éprouvées dans une trentaine de pays partenaires du GFF, dont le Burkina Faso, la Côte d'Ivoire, le Niger, le Sénégal, le Tchad et le Cameroun.",
+              "Les données restent celles du pays : une installation séparée par pays, uniquement des totaux agrégés (les mêmes que dans le DHIS2), aucune donnée nominative, un export intégral possible à tout moment.",
+              "Logiciel libre, sans licence ni frais par utilisateur ; interface en français ; rien à installer. Le ministère administre lui-même ses utilisateurs, ses importations et ses résultats."]:
+        q = doc.add_paragraph(style="List Bullet"); q.paragraph_format.space_after = Pt(2); run(q, b)
+
+    heading(doc, "Ce qu'elle ne fait pas")
+    rich(doc, [("Elle ne remplace ni le DHIS2, auquel elle se connecte, ni les enquêtes, dont elle comble les années intermédiaires. Elle ne décide pas : elle dit où regarder ; le pourquoi et l'action restent au ministère.", False)], space_after=6)
 
     heading(doc, "Pour démarrer au Bénin")
-    for b in ["Un accès en lecture au DHIS2, pour la connexion automatique.",
-              "La liste des indicateurs à suivre.",
-              "Un administrateur désigné au ministère, et une équipe à former sur les données du Bénin."]:
-        q = doc.add_paragraph(style="List Bullet"); q.paragraph_format.space_after = Pt(2); run(q, b)
-    rich(doc, [("L'équipe FASTR prépare l'instance du Bénin en français, propose une présentation avec démonstration, puis la formation et un appui à distance. Documentation : ", False), ("fastr-analytics.org/fr", True), (". Contact : fastr@usefuldata.com.au.", False)], space_after=0)
+    rich(doc, [("Un accès en lecture au DHIS2, la liste des indicateurs à suivre, un administrateur désigné au ministère et une équipe à former sur les données du Bénin. L'équipe FASTR prépare l'instance en français, propose une présentation avec démonstration, puis la formation et un appui à distance. Contact : fastr@usefuldata.com.au.", False)], space_after=0)
 
     OUT.parent.mkdir(exist_ok=True)
     doc.save(str(OUT)); print("wrote", OUT)
