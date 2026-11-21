@@ -15,6 +15,7 @@ from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
+from PIL import Image
 
 REPO = Path(__file__).resolve().parent.parent
 OUT = REPO / "outputs" / "benin_note_plateforme_fastr.docx"
@@ -40,6 +41,18 @@ def para(doc, parts, space_after=6, align=WD_ALIGN_PARAGRAPH.JUSTIFY):
     for t, b in parts:
         run(p, t, bold=b)
     return p
+
+
+def figure(doc, rel, caption, width_cm=16.0, crop=None):
+    src = REPO / "resources" / "screenshots" / rel
+    if crop:
+        im = Image.open(src).crop(crop)
+        tmp = OUT.parent / ("_fig_" + src.stem + ".png"); im.save(tmp); src = tmp
+    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.space_before = Pt(4); p.paragraph_format.space_after = Pt(2)
+    p.add_run().add_picture(str(src), width=Cm(width_cm))
+    c = doc.add_paragraph(); c.alignment = WD_ALIGN_PARAGRAPH.CENTER; c.paragraph_format.space_after = Pt(6)
+    run(c, caption, size=8.5, color=GREY, italic=True)
 
 
 def heading(doc, text):
@@ -88,9 +101,13 @@ def main():
     para(doc, "Une fois les données importées, l'administrateur lance la génération des résultats. La plateforme vérifie alors la qualité des données, corrige les séries, calcule les tendances des services, repère les mois où un service s'écarte de ce qu'il aurait dû être, et estime la couverture. Tout cela est fait en une seule opération pour tous les indicateurs, pour le pays, chaque département et chaque sous-préfecture, sans qu'aucune formule ni aucun code ne soit écrit. Les résultats sont les mêmes pour toute l'équipe.")
     para(doc, "Les utilisateurs lisent ensuite ces résultats dans une page qui les présente en tableau, en courbes ou en carte, avec des filtres par zone, par indicateur et par période. Ceux qui veulent aller plus loin construisent leurs propres graphiques en quelques clics et les enregistrent dans leur dossier. Les présentations et les rapports se composent directement dans la plateforme, aux couleurs du ministère, en y plaçant les graphiques et le texte d'interprétation ; un assistant d'intelligence artificielle, intégré, aide à décrire un graphique ou à rédiger un premier jet, en s'appuyant uniquement sur les résultats calculés. Comme les graphiques restent reliés aux données, l'arrivée du mois suivant met le rapport à jour au lieu d'obliger à le refaire. Le rapport se présente depuis la plateforme, se télécharge ou se partage.")
 
+    figure(doc, "tchad_2026_11/01_home_products.png", "La page Produits d'une instance pays : les dossiers de l'équipe et, pour chaque document, le paquet de résultats et la portée qu'il lit.", width_cm=15.5, crop=(0, 0, 1440, 400))
+
     heading(doc, "5. Ce que les analyses apportent")
     para(doc, [("La première analyse propre à la plateforme est la ", False), ("détection des perturbations de services", True),
                (". Pour chaque service et chaque zone, la plateforme calcule ce que le volume aurait dû être, à partir de l'historique de chaque formation sanitaire, de sa tendance et de sa saisonnalité, puis signale les mois où le volume réel s'en écarte, en rouge lorsque les services ont décroché et en vert lorsqu'ils ont dépassé l'attendu. Elle distingue ce qui tient à des formations qui n'ont pas rapporté de ce qui tient à une baisse réelle des services rendus. Là où un tableau de bord montre le chiffre déclaré, la plateforme dit s'il est anormal, depuis quand, de combien et où, ce qui est précisément l'information dont une direction a besoin pour agir.", False)])
+    figure(doc, "tchad_2026_11/20_explore_disruption_observed_expected.png", "Détection des perturbations, instance Tchad : volume observé (ligne pleine), volume attendu (pointillés), bande de crédibilité à 95 % (gris) ; les mois en rouge sont ceux où les services ont décroché.", width_cm=15.5, crop=(60, 215, 1440, 660))
+
     para(doc, [("La deuxième est l'", False), ("estimation de la couverture entre deux enquêtes", True),
                (". La couverture est habituellement calculée en divisant les services rendus par une population cible projetée à partir du dernier recensement ; lorsque la projection est fausse, ce qui est fréquent plusieurs années après un recensement, la couverture l'est aussi, et dépasse parfois 100 %. La plateforme estime au contraire les populations cibles à partir des services eux-mêmes, par exemple les premières consultations prénatales, les accouchements, les naissances vivantes et la première dose de pentavalent, en les calant sur la dernière enquête nationale, selon la méthode retenue par Countdown to 2030. La couverture peut ainsi être suivie chaque mois, pour le pays et pour chaque département, en attendant l'enquête suivante.", False)])
     para(doc, [("La troisième concerne la ", False), ("qualité des données", True),
