@@ -12,7 +12,9 @@ Output: outputs/benin_note_plateforme_fastr.docx
 from pathlib import Path
 
 from docx import Document
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
+from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 from PIL import Image
@@ -53,6 +55,25 @@ def figure(doc, rel, caption, width_cm=16.0, crop=None):
     p.add_run().add_picture(str(src), width=Cm(width_cm))
     c = doc.add_paragraph(); c.alignment = WD_ALIGN_PARAGRAPH.CENTER; c.paragraph_format.space_after = Pt(6)
     run(c, caption, size=8.5, color=GREY, italic=True)
+
+
+def shade(cell, hex_fill):
+    tcPr = cell._tc.get_or_add_tcPr()
+    shd = OxmlElement("w:shd"); shd.set(qn("w:val"), "clear"); shd.set(qn("w:color"), "auto"); shd.set(qn("w:fill"), hex_fill)
+    tcPr.append(shd)
+
+
+def spec_table(doc, rows):
+    t = doc.add_table(rows=len(rows), cols=2); t.style = "Table Grid"; t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    for i, (k, v) in enumerate(rows):
+        c0, c1 = t.cell(i, 0), t.cell(i, 1)
+        c0.width, c1.width = Cm(4.6), Cm(12.6)
+        for c in (c0, c1):
+            c.paragraphs[0].paragraph_format.space_after = Pt(0)
+            c.paragraphs[0].paragraph_format.line_spacing = 1.05
+        run(c0.paragraphs[0], k, bold=True, size=9, color=GREEN)
+        run(c1.paragraphs[0], v, size=9)
+        if i % 2: shade(c0, "F4F7F6"); shade(c1, "F4F7F6")
 
 
 def heading(doc, text):
@@ -125,6 +146,53 @@ def main():
 
     heading(doc, "8. Pour démarrer au Bénin")
     para(doc, "Du côté du ministère, quatre éléments suffisent : un accès en lecture au DHIS2 pour la connexion automatique, la liste des indicateurs à suivre, un administrateur désigné pour l'instance, et une équipe à former. Le GFF prépare l'instance du Bénin en français, propose une présentation avec démonstration sur les données du pays, puis la formation des équipes, suivie de l'appui à distance décrit plus haut. Documentation et méthodologie : fastr-analytics.org/fr. Contact : fastr@usefuldata.com.au.", space_after=0)
+
+    # ---------------- Annexe technique ----------------
+    br = doc.add_paragraph(); br.add_run().add_break(WD_BREAK.PAGE)
+    p = doc.add_paragraph(); p.paragraph_format.space_after = Pt(2)
+    run(p, "Annexe technique", bold=True, size=14, color=GREEN)
+    para(doc, "Spécifications de la plateforme, à l'attention des équipes informatiques et DHIS2 du ministère. Les éléments ci-dessous décrivent l'installation telle qu'elle est fournie aujourd'hui par le GFF ; ils ont été vérifiés dans la documentation technique et le code de la plateforme.", space_after=6)
+
+    heading(doc, "Accès et prérequis")
+    spec_table(doc, [
+        ("Accès utilisateur", "Application web, sans installation. Navigateurs récents (Chrome recommandé ; Firefox, Safari, Edge pris en charge). Interface en français, anglais et portugais."),
+        ("Comptes", "Inscription par adresse e-mail ; chaque compte est approuvé par l'administrateur de l'instance avant tout accès. L'authentification et les sessions sont gérées par un fournisseur d'identité ; la plateforme ne stocke aucun mot de passe. Aucun identifiant DHIS2 n'est demandé aux utilisateurs."),
+        ("Rôles et permissions", "Administrateurs de l'instance ; permissions par utilisateur (consulter ou configurer les utilisateurs, consulter ou configurer les données) ; accès aux données non restreint ou limité à des portées (une région, une période) ; accès par document et par dossier (propriétaire, éditeur, lecteur)."),
+        ("Prérequis côté ministère", "Un compte DHIS2 en lecture seule pour l'import (API), la liste des indicateurs à suivre et leur correspondance DHIS2, un administrateur désigné, une connexion internet pour les utilisateurs."),
+    ])
+
+    heading(doc, "Données")
+    spec_table(doc, [
+        ("Connexion au DHIS2", "Import côté serveur par l'API du DHIS2, par indicateur et par mois, en un clic ou programmé. Chaque import est tracé dans un registre (mois importés, dernière importation, mois en échec, relance possible)."),
+        ("Données hébergées", "Uniquement des totaux agrégés par formation sanitaire et par mois, identiques à ceux du DHIS2 ; aucune donnée individuelle ni nominative. Structure sanitaire (zones administratives, formations), indicateurs, enquêtes auprès des formations sanitaires, enquêtes ménages et données de population chargées au niveau de l'instance."),
+        ("Résultats", "Calculés par les modules intégrés en paquets de résultats versionnés ; chaque chiffre porte la version du calcul. Les méthodes sont documentées publiquement (fastr-analytics.org/fr)."),
+        ("Export", "Données, résultats, graphiques, présentations et rapports exportables à tout moment (tableaux, images, PDF, PowerPoint, Word selon l'objet)."),
+    ])
+
+    heading(doc, "Hébergement, sécurité et exploitation")
+    spec_table(doc, [
+        ("Isolation", "Une installation séparée par pays : application, base de données, cache et stockage propres, sur un réseau privé. Aucun accès entre pays."),
+        ("Chiffrement", "Communications chiffrées (TLS) entre le navigateur et la plateforme ; certificats renouvelés automatiquement ; secrets conservés côté serveur uniquement."),
+        ("Sauvegardes", "Sauvegarde de la base toutes les trente minutes (fenêtre glissante de trois jours) et instantanés quotidiens, hebdomadaires et mensuels ; restauration soumise à permission."),
+        ("Traçabilité", "Chaque action est attribuée à un compte ; les imports, les générations de résultats et les requêtes à l'assistant sont journalisés."),
+        ("Accès aux serveurs", "Réservé à l'équipe technique de la plateforme, par clé cryptographique uniquement."),
+        ("Hébergement et coûts", "Hébergement, maintenance et mises à jour assurés et pris en charge par le GFF. Le code est ouvert (licence libre) ; aucune licence ni frais par utilisateur. Un hébergement par le ministère est possible à terme, par une migration structurée qui transfère le serveur et ses procédures."),
+    ])
+
+    heading(doc, "Assistant d'intelligence artificielle")
+    spec_table(doc, [
+        ("Modèle et accès", "Modèle de langage Claude (Anthropic), appelé par le serveur de la plateforme ; la clé d'accès ne quitte jamais le serveur."),
+        ("Périmètre", "L'assistant agit dans la session de l'utilisateur, avec ses seules permissions, sur le document ouvert et son paquet de résultats. Il ne reçoit que des résultats agrégés."),
+        ("Confidentialité", "Conditions commerciales d'Anthropic : les contenus ne servent pas à entraîner les modèles, sont confidentiels et supprimés sous trente jours ; accord de traitement des données disponible. Traitement aux États-Unis."),
+        ("Limites d'usage", "Quotas quotidiens par utilisateur et hebdomadaires par instance ; chaque requête journalisée."),
+    ])
+
+    heading(doc, "Appui et communauté")
+    spec_table(doc, [
+        ("Appui technique", "Experts techniques du GFF pour la configuration, la formation sur les données du pays et l'appui à distance ; bouton d'aide dans la plateforme (visites guidées, documentation, demande d'assistance) ; contact fastr@usefuldata.com.au."),
+        ("Communauté", "Webinaire mensuel d'une heure, en ligne, le deuxième mardi du mois, organisé par le GFF et Useful Data : nouveautés, questions, échanges entre équipes pays."),
+        ("Documentation", "Guide utilisateur, guide administrateur et méthodologie en français : fastr-analytics.org/fr."),
+    ])
 
     OUT.parent.mkdir(exist_ok=True)
     doc.save(str(OUT)); print("wrote", OUT)
