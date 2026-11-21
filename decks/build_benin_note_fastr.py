@@ -100,8 +100,18 @@ def main():
     para(doc, "La plateforme d'analyse FASTR : ce qu'elle fait et pourquoi elle est utile au ministère", size=16, bold=True, color=GREEN, space_after=4)
     para(doc, "Global Financing Facility (GFF) · Novembre 2026", size=9.5, color=GREY, space_after=8)
 
-    heading(doc, "Ce que c'est")
-    rich(doc, [("La plateforme d'analyse FASTR est un site web sécurisé, propre au Bénin, qui prend les données que les formations sanitaires déclarent déjà chaque mois dans le DHIS2, les analyse automatiquement, et permet à l'équipe du ministère d'en faire des graphiques, des présentations et des rapports. Il n'y a rien à installer : on s'y connecte avec un navigateur, en français. FASTR (", False), ("Frequent Assessments and System Tools for Resilience", True), (") est l'approche du GFF pour l'analyse à cycle rapide ; la plateforme en est l'outil.", False)], space_after=8)
+    heading(doc, "Ce que c'est : un complément du DHIS2, pas un remplaçant")
+    rich(doc, [("Le DHIS2 est un excellent outil pour collecter, héberger et stocker les données de routine : c'est là que les formations sanitaires déclarent chaque mois leurs activités, et il le reste. ", False),
+               ("La plateforme d'analyse FASTR vient s'y ajouter pour ce que le DHIS2 ne fait pas : analyser ces données en profondeur et les restituer.", True),
+               (" Elle est connectée directement au DHIS2 du Bénin, qui lui transmet les données ; elles sont ensuite vérifiées, analysées et présentées dans la plateforme, sans export ni ressaisie. C'est un site web sécurisé, propre au Bénin, en français, auquel on accède avec un navigateur. FASTR (", False),
+               ("Frequent Assessments and System Tools for Resilience", True), (") est l'approche du GFF pour l'analyse à cycle rapide ; la plateforme en est l'outil.", False)], space_after=8)
+
+    heading(doc, "Ce qu'elle change dans le travail de l'équipe : moins d'efforts, plus de temps pour décider")
+    rich(doc, [("Aujourd'hui, produire une revue des services demande d'exporter les données du DHIS2 indicateur par indicateur, de les nettoyer dans un tableur, de refaire les graphiques, de les coller dans un document et de rédiger : plusieurs jours de travail, à recommencer chaque mois, avec des erreurs à chaque copier-coller et une méthode qui dépend de la personne qui la tient. ", False),
+               ("La plateforme intègre et automatise cette chaîne.", True),
+               (" Les données arrivent seules du DHIS2 ; la qualité est vérifiée et les analyses calculées en une opération pour tous les indicateurs et toutes les zones ; les graphiques se construisent en quelques clics et restent reliés aux données ; les rapports et présentations se composent dans la plateforme et se mettent à jour quand le mois suivant arrive, au lieu d'être refaits ; un assistant IA aide à interpréter et à rédiger. Le temps de l'équipe passe de la manipulation des données à leur lecture et à la décision.", False)], space_after=6)
+    rich(doc, [("Le travail est collaboratif : ", True),
+               ("toute l'équipe du ministère travaille dans le même espace, organisé en dossiers, sur les mêmes résultats. Un graphique construit par une personne sert à toutes ; plusieurs personnes peuvent travailler sur la même présentation ; chaque document garde l'historique de ses versions ; les accès se règlent par dossier et par document, et un utilisateur peut être limité à son département ou à son programme. Les directions centrales, les programmes et les départements lisent les mêmes chiffres et parlent le même langage.", False)], space_after=8)
 
     heading(doc, "Comment elle fonctionne, en quatre étapes")
     point(doc, 1, "Données : la plateforme se connecte au DHIS2 et récupère les derniers mois", [
@@ -120,7 +130,7 @@ def main():
         "Les graphiques restent reliés aux données : quand les données du mois suivant arrivent, le rapport se met à jour au lieu d'être refait. On le présente depuis la plateforme, on le télécharge ou on le partage.",
     ])
 
-    heading(doc, "Ce qui la rend utile au ministère, au-delà des outils en place")
+    heading(doc, "Trois analyses que les outils en place ne font pas")
     point(doc, 1, "Savoir chaque mois où les services décrochent, et si c'est réel", [
         "Pour chaque service et chaque zone, la plateforme calcule ce que le volume aurait dû être, à partir de l'historique de chaque formation sanitaire, de la tendance et de la saison, et signale les mois où le volume réel s'en écarte : rouge quand les services ont décroché, vert quand ils ont dépassé.",
         "Elle distingue une baisse due à des formations qui n'ont pas rapporté d'une baisse réelle des services rendus. Un tableau de bord montre le chiffre déclaré ; la plateforme dit s'il est anormal, depuis quand, de combien et où. Aucun autre outil en place ne fait cela.",
@@ -130,12 +140,6 @@ def main():
     ])
     point(doc, 3, "Des données dont la qualité est connue et corrigée", [
         "La qualité cesse d'être un argument pour ne pas se servir des données : elle devient un résultat suivi, par zone et par indicateur, que le ministère peut faire progresser.",
-    ])
-    point(doc, 4, "La revue mensuelle en quelques heures, pas en quelques jours", [
-        "Plus d'export, plus de copier-coller, plus de graphiques à refaire : le temps gagné va à l'interprétation et à la décision.",
-    ])
-    point(doc, 5, "Un travail d'équipe, chacun avec ses accès", [
-        "Un espace partagé par tout le pays, organisé en dossiers, avec un historique des versions. Les comptes sont approuvés par le ministère ; l'accès se règle par dossier et par document, et un utilisateur peut être limité à son département ou à son programme : chacun voit ce qu'il doit voir.",
     ])
 
     heading(doc, "Concrètement, pour qui ?")
