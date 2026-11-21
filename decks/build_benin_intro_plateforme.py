@@ -50,137 +50,135 @@ CONTENT = [
     {"type": "cover", "title": "La plateforme d'analyse FASTR",
      "subtitle": "Frequent Assessments and System Tools for Resilience\nL'approche du GFF pour l'analyse à cycle rapide et l'utilisation des données",
      "presenter": "Introduction pour le ministère de la Santé du Bénin  ·  Global Financing Facility  ·  Novembre 2026",
-     "notes": "Lire l'acronyme à voix haute : des évaluations fréquentes, et des outils qui rendent le système plus résilient.\n\nCette présentation répond à une question posée par le ministère : qu'est-ce qui distingue cet outil de ceux déjà utilisés sur le terrain ? Environ quinze minutes, puis une démonstration si la connexion le permet."},
+     "notes": "Lire l'acronyme à voix haute : des évaluations fréquentes, et des outils qui rendent le système plus résilient.\n\nCette présentation répond à une question posée par le ministère : qu'est-ce qui distingue cet outil de ceux déjà utilisés sur le terrain ? Elle montre l'interface, écran par écran. Environ quinze minutes, puis une démonstration en direct si la connexion le permet."},
 
     {"type": "statement", "kicker": "La question",
      "text": "Les formations sanitaires du Bénin déclarent leurs activités chaque mois dans le DHIS2. Comment transformer ces données, chaque trimestre, en décisions de programme, sans attendre la prochaine enquête ?",
      "notes": "Partir du constat que le ministère connaît : les données existent, elles arrivent chaque mois, et pourtant la plupart des décisions entre deux enquêtes se prennent sans analyse récente de ces données."},
 
-    # ---- Ce que font les outils en place -----------------------------------
-    {"type": "table", "title": "Les outils en place répondent chacun à une partie du besoin",
-     "intro": "Lecture par ligne : ce que chaque famille d'outils fait bien, et ce qu'elle laisse à faire à la main.",
-     "headers": ["Famille d'outils", "Ce qu'elle fait", "Ce qui reste à faire à la main"],
-     "colw": [2.6, 4.6, 4.89], "bold_first": True, "fs": 13, "rows": [
-        ["DHIS2 et ses tableaux de bord", "Collecte, stocke et affiche les données déclarées, telles quelles.", "Juger si une baisse est réelle ou due à des rapports manquants ; comparer à une valeur attendue ; estimer une couverture."],
-        ["Outils de qualité des données", "Signalent les rapports manquants, les valeurs aberrantes et les incohérences.", "Corriger les séries avant de les analyser ; relier la qualité aux résultats qui en dépendent."],
-        ["Tableaux de bord décisionnels (BI)", "Mettent en forme et partagent des indicateurs choisis.", "Toute l'analyse en amont ; chaque pays reconstruit ses propres règles."],
-        ["Feuilles de calcul et scripts", "Permettent n'importe quelle analyse, par des analystes formés.", "Refaire le travail chaque mois ; la méthode dépend de la personne et part avec elle."],
-     ],
-     "note": "Ces outils restent utiles. La plateforme FASTR ne les remplace pas : elle ajoute l'étape d'analyse qui manque entre les données brutes et la décision.",
-     "notes": "Ne pas critiquer les outils que le ministère utilise. Le DHIS2 est la source et le reste ; les tableaux de bord servent au suivi. Le point est la couche manquante : personne ne dit, chaque mois, si les chiffres sont fiables, s'ils s'écartent de l'attendu, et ce que cela représente en couverture.\n\nSi la salle cite un outil précis, demander dans quelle ligne il se range et ce qu'il laisse à faire à la main."},
-
     {"type": "diagram", "title": "Le circuit mensuel : à la main, et avec la plateforme",
      "intro": "Même point de départ, le DHIS2. La différence est ce qui se passe entre l'export et le rapport.",
      "image": "diagrams_fr/workflow_manual_vs_fastr.svg",
-     "footer": "Avec la plateforme, le rapport est lié à un paquet de résultats : un nouveau mois de données, c'est un nouveau paquet, et le rapport se met à jour.",
-     "notes": "Rangée du haut : quatre étapes refaites chaque mois, avec un copier-coller à chaque passage. Demander à la salle combien de temps prend un rapport mensuel aujourd'hui.\n\nRangée du bas : l'administrateur importe par l'API du DHIS2 et génère un paquet de résultats ; l'utilisateur met à jour son rapport à partir du paquet. Les graphiques restent liés aux données."},
+     "footer": "La plateforme ne remplace ni le DHIS2 ni les enquêtes : elle fait le travail situé entre les données brutes et le rapport.",
+     "notes": "Rangée du haut : quatre étapes refaites chaque mois, avec un copier-coller à chaque passage. Demander à la salle combien de temps prend un rapport mensuel aujourd'hui.\n\nRangée du bas : l'administrateur importe par l'API du DHIS2 et génère un paquet de résultats ; l'utilisateur met à jour son rapport à partir du paquet."},
 
-    # ---- Ce que la plateforme fait -----------------------------------------
-    {"type": "section", "kicker": "Ce que la plateforme ajoute", "title": "Une couche d'analyse au-dessus du DHIS2, la même dans tous les pays"},
+    # ---- Visite de l'interface ---------------------------------------------
+    {"type": "section", "kicker": "Visite de l'interface", "title": "Ce que voit un utilisateur, écran par écran"},
 
-    {"type": "numbered", "title": "Quatre analyses, dans l'ordre, calculées en un seul paquet de résultats", "steps": [
-        ("Qualité évaluée", "Complétude, valeurs aberrantes et cohérence, établissement par établissement et mois par mois."),
-        ("Qualité corrigée", "Les valeurs aberrantes sont remplacées et les mois manquants comblés ; l'original reste disponible."),
-        ("Perturbations", "Le volume observé est comparé au volume attendu de chaque établissement, avec une bande de crédibilité à 95 %."),
-        ("Couverture", "Les dénominateurs sont estimés à partir des points d'entrée du système, puis la couverture de chaque service."),
-     ], "footer": "Un administrateur génère le paquet après chaque import. Personne n'écrit de code, personne ne refait les calculs à la main.",
-     "notes": "Les méthodes sont documentées publiquement sur fastr-analytics.org et identiques dans tous les pays. Une analyse faite à Cotonou et une analyse faite à Dakar se comparent.\n\nLe paquet de résultats est versionné : chaque chiffre porte la version du calcul qui l'a produit, et les produits lisent tous le même paquet."},
+    {"type": "image_text", "title": "Connectée au DHIS2 : plus rien à télécharger à la main", "side": "right", "tw": 4.6,
+     "image": "screenshots/platform_v2_fr/16_data.png", "blocks": [
+        {"t": "La page **Données** relie la plateforme au DHIS2 du pays. L'importation des derniers mois se lance en un clic ou se programme, et se répète seule.", "space": 10},
+        {"t": "Les enquêtes auprès des formations sanitaires, les enquêtes ménages et les données de population se chargent au même endroit : **toutes les sources pour tout le pays**.", "space": 10},
+        {"t": "Fini les exports indicateur par indicateur et les fichiers Excel qui circulent.", "space": 0},
+     ],
+     "notes": "Page réservée aux administrateurs. La structure sanitaire, les indicateurs et les sources sont configurés une fois ; ensuite l'import est mensuel et automatique."},
 
-    {"type": "image_text", "title": "Un signal, pas un tableau de chiffres", "side": "right", "tw": 5.2,
+    {"type": "image_text", "title": "Un paquet de résultats : toutes les analyses calculées en une fois", "side": "right", "tw": 4.6,
+     "image": "screenshots/platform_v2_fr/15_results_packages.png", "blocks": [
+        {"t": "Sur la page **Résultats**, l'administrateur génère un paquet : qualité des données évaluée et corrigée, perturbations, couverture, pour tous les indicateurs et toutes les zones.", "space": 10},
+        {"t": "Les méthodes sont intégrées et identiques dans une trentaine de pays. **Personne n'écrit de code.**", "space": 10},
+        {"t": "Un nouveau mois de données donne un nouveau paquet ; tous les rapports du pays le lisent.", "space": 0},
+     ],
+     "notes": "Le paquet est la pièce centrale : il est calculé une fois, partagé par tous, et chaque rapport y est relié. C'est ce qui rend la mise à jour mensuelle possible sans refaire le travail."},
+
+    {"type": "image_text", "title": "Explorer : tous les résultats, en lecture directe", "side": "right", "tw": 4.6,
+     "image": "screenshots/tchad_2026_11/13_explore.png", "blocks": [
+        {"t": "La page **Explorer** montre chaque analyse du paquet en tableau, en graphiques dans le temps ou en carte, par province, département ou sous-préfecture.", "space": 10},
+        {"t": "Un filtre sur le niveau, les indicateurs et la période. Rien à créer, rien à casser : on regarde avant de construire.", "space": 0},
+     ],
+     "notes": "Capture d'une instance pays (Tchad, novembre 2026). Montrer la même page sur l'instance du Bénin dès que les données sont importées."},
+
+    {"type": "image_text", "title": "Une analyse des perturbations que l'on ne trouve nulle part ailleurs", "side": "right", "tw": 4.6,
      "image": "screenshots/tchad_2026_11/20_explore_disruption_observed_expected.png", "blocks": [
-        {"t": "Pour chaque indicateur, la plateforme trace le volume observé (ligne pleine), le volume attendu (pointillés) et la bande de crédibilité à 95 %.", "space": 10},
-        {"t": "Rouge là où l'observé passe sous la bande, vert au-dessus. Le modèle sépare les établissements qui n'ont pas rapporté de ceux qui ont rapporté moins : seul le second cas est une perturbation de service.", "space": 10},
-        {"t": "Un décideur voit en une page où les services ont décroché, depuis quand et de combien. Le pourquoi reste une question pour le terrain.", "space": 0},
+        {"t": "Pour chaque service, la plateforme calcule ce que le volume **aurait dû être**, compte tenu de l'historique de chaque établissement, de la tendance et de la saison, et signale les mois qui s'en écartent : rouge en dessous, vert au-dessus.", "space": 10},
+        {"t": "Elle distingue une baisse due à des établissements qui n'ont pas rapporté d'une **baisse réelle des services**.", "space": 10},
+        {"t": "Un tableau de bord montre le volume déclaré ; FASTR dit s'il est anormal, depuis quand, de combien et où.", "space": 0},
      ],
-     "notes": "Capture d'une instance pays (Tchad, novembre 2026), page Explorer, module Détection des perturbations. Montrer la même page sur l'instance du Bénin une fois les données importées.\n\nC'est la différence avec un tableau de bord : le tableau de bord montre le volume ; ici, le volume est comparé à ce qu'il aurait dû être, établissement par établissement, en tenant compte de la tendance et de la saison."},
+     "notes": "Capture réelle (Tchad). C'est le point qui distingue le plus FASTR d'un tableau de bord. Plusieurs pays s'en servent pour suivre mois par mois l'effet des changements de financement sur les services."},
 
-    {"type": "image_text", "title": "La couverture suivie chaque mois, entre deux enquêtes", "side": "right", "tw": 5.2,
+    {"type": "image_text", "title": "La couverture, alignée sur Countdown, sans dépendre des projections de population", "side": "right", "tw": 4.6,
      "image": "screenshots/platform_v2_fr/13e_explore_coverage_table.png", "blocks": [
-        {"t": "Gris : la couverture calculée à partir des données de routine. Noir : la dernière enquête (EDS, MICS). Rouge : la projection qui prolonge l'enquête avec la tendance de routine.", "space": 10},
-        {"t": "Les dénominateurs viennent des points d'entrée du système (CPN1, accouchements, naissances vivantes, Penta1), et non d'un seul recensement projeté.", "space": 10},
-        {"t": "Le pays choisit ses taux (grossesses, mortalité, abandon) ; la méthode est la même partout.", "space": 0},
+        {"t": "La couverture habituelle divise les services par une population projetée depuis le dernier recensement ; quand la projection est fausse, la couverture l'est aussi.", "space": 10},
+        {"t": "FASTR estime les dénominateurs **à partir des services eux-mêmes** (CPN1, accouchements, naissances vivantes, Penta1), calés sur la dernière enquête, selon la méthode de Countdown to 2030.", "space": 10},
+        {"t": "Gris : routine. Noir : enquête. Rouge : projection. La couverture est suivie chaque mois, entre deux enquêtes.", "space": 0},
      ],
-     "notes": "Capture du site de démonstration en français. Les deux enquêtes restent la référence ; la plateforme comble les années entre elles.\n\nSi la question du choix du dénominateur se pose, renvoyer au document de méthodologie : la plateforme compare les chaînes de dénominateurs et retient celle qui concorde le mieux avec l'enquête."},
+     "notes": "Capture du site de démonstration en français. L'enquête reste la référence ; la plateforme comble les années entre deux enquêtes, au niveau national et par région."},
 
-    # ---- Comment on s'en sert ----------------------------------------------
-    {"type": "section", "kicker": "Comment on s'en sert", "title": "Une seule base pour le pays, des produits reliés aux résultats"},
+    {"type": "image_text", "title": "Un espace de travail partagé, rangé en dossiers", "side": "right", "tw": 4.6,
+     "image": "screenshots/tchad_2026_11/01_home_products.png", "blocks": [
+        {"t": "La page **Produits** fonctionne comme un disque partagé par tout le pays : des dossiers, et dedans les visualisations, présentations et rapports de l'équipe.", "space": 10},
+        {"t": "Chaque produit indique le paquet de résultats qu'il lit. Tout s'enregistre en continu, avec un historique des versions ; plusieurs personnes travaillent sur la même présentation.", "space": 10},
+        {"t": "Les comptes sont approuvés par le ministère ; l'accès se règle par dossier et par produit : **chacun voit ce qu'il doit voir**.", "space": 0},
+     ],
+     "notes": "Capture de l'instance Tchad. Un utilisateur peut aussi être limité à une région ou à une période par une portée : il ne voit que son périmètre, partout dans la plateforme."},
 
-    {"type": "diagram", "title": "Une seule base pour tout le pays, rangée en dossiers",
-     "intro": "La page Produits fonctionne comme un espace partagé : des dossiers, des fichiers, et un réglage d'accès par fichier.",
-     "image": "diagrams_fr/products_folders_scopes.svg",
-     "footer": "Chaque visualisation, présentation ou rapport lit un paquet de résultats à travers une portée : tout le pays, une région, une période.",
-     "notes": "Analogie utile : un Google Drive partagé par le pays. Les fichiers sont les produits, les dossiers rangent les produits, Gérer l'accès décide qui ouvre quoi.\n\nUne différence : chaque fichier est lié à un paquet de résultats et à une portée, indiqués dans sa ligne. C'est ce qui permet la mise à jour mensuelle sans reconstruire."},
+    {"type": "image_text", "title": "Un graphique se construit en quelques clics, sans code", "side": "right", "tw": 4.6,
+     "image": "screenshots/platform_v2_fr/11c_visualization_timeseries_anc1.png", "blocks": [
+        {"t": "On choisit un module et une métrique, puis un préréglage ou un type de graphique. L'éditeur permet de **filtrer** (une région, une période) et de **désagréger** (une courbe par province).", "space": 10},
+        {"t": "Le graphique est enregistré dans le dossier de l'utilisateur et peut être inséré dans n'importe quelle présentation ou rapport.", "space": 0},
+     ],
+     "notes": "Capture du site de démonstration. Le même graphique sert ensuite à tout le monde : revue, bulletin, note."},
 
-    {"type": "two_col", "title": "Trois formats de restitution, mis à jour avec les données", "widths": [1, 1], "cols": [
-        {"head": "Ce que l'utilisateur produit", "size": 14, "items": [
-            "**Visualisations** : un graphique, une carte ou un tableau, enregistré dans son dossier",
-            "**Présentations** : des diapositives qui combinent graphiques et texte, présentées depuis la plateforme ou téléchargées",
-            "**Rapports** : des documents narratifs avec des figures en direct, téléchargés ou envoyés",
-            "**Explorer** : un coup d'œil à n'importe quel résultat, sans rien créer"]},
-        {"head": "Ce qui change par rapport à un fichier Word", "size": 14, "items": [
-            "Les figures restent **liées au paquet** : changer de paquet met tout à jour",
-            "Le travail est **enregistré en continu** et visible par l'équipe, avec un historique des versions",
-            "L'**assistant IA** travaille dans le produit ouvert : il lit les résultats calculés, met à jour les figures et rédige un premier jet que l'équipe relit",
-            "L'assistant **n'invente aucun chiffre** : il n'a accès qu'au paquet du produit"]}],
-     "notes": "Le rapport mensuel devient un produit que l'on met à jour, pas un fichier que l'on refait. L'assistant accélère la rédaction ; la relecture et la signature restent celles de l'équipe.\n\nInterface en français, anglais et portugais. Rien à installer : un navigateur suffit."},
+    {"type": "image_text", "title": "Conçue pour produire de bonnes présentations et de bons rapports", "side": "right", "tw": 4.6,
+     "image": "screenshots/platform_v2_fr/27_slide_with_visualization.png", "blocks": [
+        {"t": "Les présentations et les rapports se composent dans la plateforme : thèmes, logo du ministère, pied de page, diapositives avec graphique et interprétation.", "space": 10},
+        {"t": "Les figures restent **reliées au paquet** : quand un nouveau mois arrive, elles se mettent à jour. Le rapport mensuel devient un produit que l'on met à jour, pas un fichier que l'on refait.", "space": 10},
+        {"t": "Présentation depuis la plateforme, téléchargement ou partage direct.", "space": 0},
+     ],
+     "notes": "Capture du site de démonstration. L'éditeur de rapport fonctionne comme un traitement de texte, avec les figures en direct."},
 
-    # ---- Ce qui distingue FASTR --------------------------------------------
+    {"type": "image_text", "title": "Un assistant IA intégré, qui lit vos données", "side": "right", "tw": 4.6,
+     "image": "screenshots/platform_v2_fr/20c_deck_editor_ai_panel.png", "blocks": [
+        {"t": "Dans chaque produit, un panneau **IA** répond à des questions posées en français, construit ou modifie des graphiques, propose une interprétation et rédige un premier jet de rapport.", "space": 10},
+        {"t": "Il travaille uniquement à partir des résultats calculés dans la plateforme : **il n'invente aucun chiffre**. L'équipe relit et garde la main.", "space": 0},
+     ],
+     "notes": "Capture du site de démonstration en français, éditeur de présentation avec le panneau IA ouvert. En démonstration, demander à l'assistant un graphique puis une interprétation pour montrer les deux usages."},
+
+    # ---- Synthèse ----------------------------------------------------------
     {"type": "contrast", "title": "Ce qui distingue la plateforme FASTR", "cols": [
-        {"head": "Ce qu'elle fait que les autres ne font pas", "accent": DEEP_GREEN, "items": [
-            "La **qualité** est évaluée et **corrigée** avant toute analyse, et suivie comme un résultat",
-            "Les **perturbations** sont détectées par rapport à un attendu, établissement par établissement",
-            "La **couverture** est estimée chaque mois avec des dénominateurs issus du système",
-            "La **méthode est dans l'outil**, identique dans une trentaine de pays et documentée publiquement"]},
+        {"head": "Ce qu'elle fait", "accent": DEEP_GREEN, "items": [
+            "**Connectée au DHIS2**, toutes les sources au même endroit, plus rien à télécharger",
+            "**Qualité** vérifiée et corrigée ; **perturbations** détectées par rapport à l'attendu ; **couverture** alignée sur Countdown",
+            "Rapports et présentations **reliés aux résultats**, mis à jour chaque mois, avec un **assistant IA** intégré",
+            "Un espace **collaboratif**, des accès réglés par le ministère, la même méthode dans une trentaine de pays"]},
         {"head": "Ce qu'elle ne fait pas", "accent": GREEN, "items": [
-            "Elle ne remplace pas le **DHIS2** : elle lit ses données par l'API",
-            "Elle ne collecte pas de **données patients** : uniquement des totaux agrégés par établissement et par mois",
+            "Elle ne remplace pas le **DHIS2** : elle s'y connecte",
+            "Elle ne remplace pas les **enquêtes** : elle comble les années entre elles",
             "Elle ne **décide** pas : elle dit où regarder ; le pourquoi et l'action restent au ministère"]},
      ], "bottom": [
         ("Tableau de bord", "Montre les chiffres déclarés, tels quels, dans un format choisi.", INK3),
         ("Plateforme FASTR", "Dit si les chiffres sont fiables, s'ils s'écartent de l'attendu et ce qu'ils représentent en couverture.", GREEN),
      ],
-     "notes": "C'est la diapositive qui répond à la question du ministère. Les quatre points de gauche sont les spécificités ; les trois de droite évitent les malentendus les plus fréquents (remplacer le DHIS2, héberger des données patients, décider à la place du ministère)."},
+     "notes": "C'est la diapositive qui répond à la question du ministère. La note technique qui accompagne la présentation reprend ces points un par un."},
 
-    {"type": "two_col", "title": "Sécurité, souveraineté et coût", "widths": [1, 1], "cols": [
-        {"head": "Les données restent celles du pays", "size": 14, "items": [
-            "Une **installation isolée par pays** : application, base et stockage séparés, aucun accès entre pays",
+    {"type": "two_col", "title": "Les données restent celles du pays", "widths": [1, 1], "cols": [
+        {"head": "Sécurité et souveraineté", "size": 14, "items": [
+            "Une **installation séparée par pays**, sans accès entre pays",
             "Des **totaux agrégés** seulement, les mêmes que dans le DHIS2 ; aucune donnée nominative",
-            "Des **comptes approuvés** par l'administrateur du ministère, des accès par produit et par dossier, un **journal** de chaque action",
-            "L'**export intégral** des données et des résultats à tout moment"]},
-        {"head": "Ce que cela coûte et où cela va", "size": 14, "items": [
-            "Logiciel **open source** : ni licence, ni frais par utilisateur",
-            "Trois lignes de fonctionnement : l'hébergement du serveur du pays, l'usage de l'assistant IA au compteur, la maintenance partagée",
-            "Les administrateurs du ministère gèrent déjà utilisateurs, imports et paquets",
-            "Objectif proposé : un **hébergement par le ministère** à terme, par une migration structurée"]}],
-     "notes": "Le détail figure dans le dossier « Sécurité, coûts et appropriation », disponible en français, et dans la note technique qui accompagne cette présentation.\n\nSi des données patients devaient un jour être hébergées, les exigences changent ; ce n'est pas le périmètre actuel."},
+            "Des comptes approuvés par le ministère, un **journal** de chaque action, l'**export intégral** à tout moment"]},
+        {"head": "Coût et appropriation", "size": 14, "items": [
+            "Logiciel **libre** : ni licence, ni frais par utilisateur",
+            "Interface en **français** ; rien à installer, un navigateur suffit",
+            "Les administrateurs du ministère gèrent utilisateurs, imports et paquets ; objectif d'un **hébergement par le ministère** à terme"]}],
+     "notes": "Le détail figure dans le dossier « Sécurité, coûts et appropriation », disponible en français."},
 
-    {"type": "content", "title": "Une trentaine de pays, dont les voisins du Bénin", "tw": 10.8, "blocks": [
-        {"t": "Une trentaine de pays partenaires du GFF disposent de leur instance FASTR, en français, en anglais ou en portugais.", "size": 16, "space": 12},
-        {"t": "En Afrique de l'Ouest et du Centre : le Burkina Faso, la Côte d'Ivoire, la Guinée, le Mali, le Niger, le Sénégal, la Mauritanie, le Tchad, le Cameroun, le Nigeria et le Ghana, entre autres.", "size": 16, "space": 12},
-        {"t": "Plusieurs ont commencé par le suivi de la continuité des services après des changements de financement extérieur, avant d'élargir l'usage au suivi de routine et aux revues trimestrielles.", "size": 16, "space": 12},
-        {"t": "Les équipes sont formées sur leurs propres données, dans leur instance, à partir d'un programme commun : configuration, importation, analyse, restitution.", "size": 16, "space": 0},
-     ],
-     "notes": "Ne pas citer de résultats d'un autre pays sans son accord. Les retours d'expérience utiles pour le Bénin : la formation des formateurs au Tchad (novembre 2026), l'institutionnalisation en Mauritanie, le bulletin trimestriel au Sénégal."},
-
-    {"type": "two_col", "title": "Ce qu'il faut pour démarrer au Bénin", "widths": [1, 1], "cols": [
-        {"head": "Du côté du ministère", "size": 14, "items": [
-            "Un **accès en lecture au DHIS2** par l'API, pour l'import automatique",
-            "La **liste des indicateurs** à suivre et leur correspondance DHIS2",
-            "Un **administrateur** désigné pour l'instance : comptes, imports, paquets",
-            "Une **équipe utilisatrice** à former : analyse, interprétation, restitution"]},
-        {"head": "Du côté de l'équipe FASTR", "size": 14, "items": [
-            "L'instance du Bénin, en français, prête avant la formation",
-            "La **note technique** sur les spécifications de la plateforme",
-            "Une **présentation** et une démonstration sur les données du Bénin",
-            "La **formation** : prise en main, Explorer, visualisations, présentations et rapports, puis l'appui à distance"]}],
-     "notes": "Proposer un ordre : note technique, puis présentation et démonstration, puis formation sur les données du Bénin. Les prérequis du ministère tiennent en quatre lignes ; aucun n'exige d'achat."},
+    {"type": "two_col", "title": "Une trentaine de pays, et ce qu'il faut pour démarrer au Bénin", "widths": [1, 1], "cols": [
+        {"head": "Où la plateforme est en service", "size": 14, "items": [
+            "Une trentaine de pays partenaires du GFF, en français, anglais ou portugais",
+            "En Afrique de l'Ouest et du Centre : Burkina Faso, Côte d'Ivoire, Guinée, Mali, Niger, Sénégal, Mauritanie, Tchad, Cameroun, Nigeria, Ghana",
+            "Les équipes sont formées sur leurs propres données, dans leur instance"]},
+        {"head": "Pour démarrer", "size": 14, "items": [
+            "Un **accès en lecture au DHIS2**, pour la connexion automatique",
+            "La **liste des indicateurs** à suivre",
+            "Un **administrateur** au ministère et une **équipe à former**",
+            "L'équipe FASTR prépare l'instance en français, puis présentation, démonstration et formation"]}],
+     "notes": "Ne pas citer de résultats d'un autre pays sans son accord. Proposer l'ordre : note technique, présentation et démonstration, formation sur les données du Bénin."},
 
     {"type": "closing", "title": "La plateforme d'analyse FASTR",
      "tagline": "Analyser  ·  Apprendre  ·  Renforcer  ·  Agir",
      "contact": "Documentation et méthodologie : fastr-analytics.org/fr  ·  fastr@usefuldata.com.au",
      "notes": "Guide utilisateur, guide administrateur et méthodologie en français sur fastr-analytics.org/fr."},
 ]
-
 
 def main():
     prs = Presentation()
